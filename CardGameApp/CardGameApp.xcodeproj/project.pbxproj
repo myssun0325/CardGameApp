@@ -12,6 +12,7 @@
 		7333ECBD20FCEDBE006EFEF4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7333ECBB20FCEDBE006EFEF4 /* Main.storyboard */; };
 		7333ECBF20FCEDBF006EFEF4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7333ECBE20FCEDBF006EFEF4 /* Assets.xcassets */; };
 		7333ECC220FCEDBF006EFEF4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7333ECC020FCEDBF006EFEF4 /* LaunchScreen.storyboard */; };
+		73AEEC2120FDE1CB00074032 /* CardImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AEEC2020FDE1CB00074032 /* CardImageView.swift */; };
 		C8AEF50C4754CC6BD359A7AA /* Pods_CardGameApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E60317B0C17930097C3565C /* Pods_CardGameApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -24,6 +25,7 @@
 		7333ECBE20FCEDBF006EFEF4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7333ECC120FCEDBF006EFEF4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7333ECC320FCEDC0006EFEF4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		73AEEC2020FDE1CB00074032 /* CardImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardImageView.swift; sourceTree = "<group>"; };
 		97D29888FD0FAC95DCF60A35 /* Pods-CardGameApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardGameApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CardGameApp/Pods-CardGameApp.debug.xcconfig"; sourceTree = "<group>"; };
 		ACDDCE0F06FF0501BCDFF06A /* Pods-CardGameApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardGameApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-CardGameApp/Pods-CardGameApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -71,6 +73,7 @@
 			children = (
 				7333ECB720FCEDBE006EFEF4 /* AppDelegate.swift */,
 				7333ECB920FCEDBE006EFEF4 /* ViewController.swift */,
+				73AEEC2020FDE1CB00074032 /* CardImageView.swift */,
 				7333ECBB20FCEDBE006EFEF4 /* Main.storyboard */,
 				7333ECBE20FCEDBF006EFEF4 /* Assets.xcassets */,
 				7333ECC020FCEDBF006EFEF4 /* LaunchScreen.storyboard */,
@@ -196,6 +199,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7333ECBA20FCEDBE006EFEF4 /* ViewController.swift in Sources */,
+				73AEEC2120FDE1CB00074032 /* CardImageView.swift in Sources */,
 				7333ECB820FCEDBE006EFEF4 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
