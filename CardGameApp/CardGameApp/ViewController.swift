@@ -23,18 +23,21 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBackGround()
-        
+        setupCardImageView()
+    }
+    
+    private func setupBackGround() {
+        guard let backgroundImage = UIImage(named: ImageName.background) else { return }
+        self.view.backgroundColor = UIColor(patternImage: backgroundImage)
+    }
+    
+    private func setupCardImageView() {
         for order in 0..<7 {
             let cardImageView = makeCardImageView()
             view.addSubview(cardImageView)
             cardImageView.frame.origin = CGPoint(x: self.view.frame.width / 7 * CGFloat(order),
                                                  y: UIApplication.shared.statusBarFrame.height + 10)
         }
-    }
-    
-    private func setupBackGround() {
-        guard let backgroundImage = UIImage(named: ImageName.background) else { return }
-        self.view.backgroundColor = UIColor(patternImage: backgroundImage)
     }
     
     private func makeCardImageView() -> UIImageView {
