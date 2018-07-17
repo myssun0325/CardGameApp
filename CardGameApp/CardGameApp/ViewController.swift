@@ -10,12 +10,22 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    private struct Constants {
+        static let backgroundImageName = "bg_pattern"
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setBackGround()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+    
+    private func setBackGround() {
+        guard let image = UIImage(named: Constants.backgroundImageName) else { return }
+        self.view.backgroundColor = UIColor(patternImage: image)
+    }
+        
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
 }
 
