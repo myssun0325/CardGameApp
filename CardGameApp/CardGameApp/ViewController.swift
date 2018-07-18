@@ -9,7 +9,8 @@
 import UIKit
 
 struct CardSize {
-    static let width = UIScreen.main.bounds.width / 7 * 0.9
+    static let spacing: CGFloat = 5 // 카드 사이 간격
+    static let width = (UIScreen.main.bounds.width - CardSize.spacing * 8) / 7
     static let height = CardSize.width * 1.27
 }
 
@@ -20,31 +21,35 @@ struct ImageName {
 
 class ViewController: UIViewController {
     
+    private let widthSpacing: CGFloat = CardSize.width + CardSize.spacing
+    private let topSpacingOfFoundationView: CGFloat = 20
+    private let numberOfFoundationContainer: Int = 4
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupBackGround()
-        setupCardImageView()
+        view.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 0, leading: CardSize.spacing, bottom: 0, trailing: CardSize.spacing)
+        setupBackGroundPatternImage()
+        setupFoundationConatinerViews()
     }
     
-    private func setupBackGround() {
+    private func setupBackGroundPatternImage() {
         guard let backgroundImage = UIImage(named: ImageName.background) else { return }
         self.view.backgroundColor = UIColor(patternImage: backgroundImage)
     }
     
-    private func setupCardImageView() {
-        for order in 0..<7 {
-            let cardImageView = makeCardImageView()
-            view.addSubview(cardImageView)
-            cardImageView.frame.origin = CGPoint(x: self.view.frame.width / 7 * CGFloat(order),
-                                                 y: UIApplication.shared.statusBarFrame.height + 10)
+    private func setupFoundationConatinerViews() {
+        for count in 0..<numberOfFoundationContainer {
+            let foundationView = UIView()
+            foundationView.frame = CGRect(x: self.view.directionalLayoutMargins.leading + CGFloat(count) * widthSpacing,
+                                          y: topSpacingOfFoundationView,
+                                          width: CardSize.width,
+                                          height: CardSize.height)
+            foundationView.layer.cornerRadius = 5
+            foundationView.layer.borderColor = UIColor.white.cgColor
+            foundationView.layer.borderWidth = 1
+            foundationView.layer.masksToBounds = true
+            view.addSubview(foundationView)
         }
-    }
-    
-    private func makeCardImageView() -> UIImageView {
-        let cardImageView = UIImageView()
-        cardImageView.image = UIImage(named: ImageName.cardBack)
-        cardImageView.frame.size = CGSize(width: CardSize.width, height: CardSize.height)
-        return cardImageView
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
