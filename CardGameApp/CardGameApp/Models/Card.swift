@@ -6,16 +6,25 @@
 //  Copyright © 2018년 moon. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class Card {
     private let suit: Suit
     private let number: Number
+    private var isShowingBack: Bool = true
     
     init(suit: Suit, number: Number) {
         self.suit = suit
         self.number = number
     }
+    
+    func imageOfCard() -> UIImage? {
+        switch self.isShowingBack {
+        case true:  return UIImage(named: ImageName.cardBack)
+        case false: return UIImage(named: self.description)
+        }
+    }
+    
 }
 
 extension Card {
