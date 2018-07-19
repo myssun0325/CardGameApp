@@ -24,7 +24,6 @@ class Card {
         case false: return UIImage(named: self.description)
         }
     }
-    
 }
 
 extension Card {

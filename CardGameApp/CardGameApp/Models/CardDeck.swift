@@ -16,6 +16,10 @@ class CardDeck {
         resetCards()
     }
     
+    var topCard: Card? {
+        return self.cards.last
+    }
+    
     func resetCards() {
         var cards: [Card] = [Card]()
         for suit in Card.Suit.allCases {
@@ -33,6 +37,10 @@ class CardDeck {
             shuffled.append(self.cards.remove(at: Int(arc4random_uniform(count))))
         }
         self.cards = shuffled
+    }
+    
+    func removeTopCard() -> Card? {
+        return self.cards.popLast()
     }
 }
 

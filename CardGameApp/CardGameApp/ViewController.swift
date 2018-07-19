@@ -22,38 +22,56 @@ struct ImageName {
 class ViewController: UIViewController {
     
     private let widthSpacing: CGFloat = CardSize.width + CardSize.spacing
-    private let topSpacingOfFoundationView: CGFloat = 20
+    private let topSpacingOfFoundationViews: CGFloat = 20
+    private let topSpacingOfCardStackViews: CGFloat = 100
     private let numberOfFoundationContainer: Int = 4
+    private let numberOfCardStackViews: Int = 7
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 0, leading: CardSize.spacing, bottom: 0, trailing: CardSize.spacing)
-        setupBackGroundPatternImage()
-        setupFoundationConatinerViews()
-    }
+    var cardDeck: CardDeck!
+    
+    // MARK: CardDeckView
+    lazy var cardDeckView: CardDeckView = {
+        let cardDeckView = CardDeckView(frame: CGRect(x: self.view.frame.width - widthSpacing,
+                           y: topSpacingOfFoundationViews,
+                           width: CardSize.width, height: CardSize.height))
+        return cardDeckView
+    }()
+    
+    // MARK: FoundationCardsView
+    lazy var foundationCardsView: FoundationCardsView = {
+        let foundationViews = FoundationCardsView()
+        foundationViews.frame = CGRect(x: CardSize.spacing, y: topSpacingOfFoundationViews,
+                                       width: foundationViews.totalWidth,
+                                       height: CardSize.height)
+        return foundationViews
+    }()
     
     private func setupBackGroundPatternImage() {
         guard let backgroundImage = UIImage(named: ImageName.background) else { return }
         self.view.backgroundColor = UIColor(patternImage: backgroundImage)
     }
     
-    private func setupFoundationConatinerViews() {
-        for count in 0..<numberOfFoundationContainer {
-            let foundationView = UIView()
-            foundationView.frame = CGRect(x: self.view.directionalLayoutMargins.leading + CGFloat(count) * widthSpacing,
-                                          y: topSpacingOfFoundationView,
-                                          width: CardSize.width,
-                                          height: CardSize.height)
-            foundationView.layer.cornerRadius = 5
-            foundationView.layer.borderColor = UIColor.white.cgColor
-            foundationView.layer.borderWidth = 1
-            foundationView.layer.masksToBounds = true
-            view.addSubview(foundationView)
-        }
+    private func setup() {
+        view.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 0, leading: CardSize.spacing, bottom: 0, trailing: CardSize.spacing)
+        setupBackGroundPatternImage()
+        view.addSubview(cardDeckView)
+        view.addSubview(foundationCardsView)
     }
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setup()
     }
+
+    // Set Status Bar Color
+    override var preferredStatusBarStyle: UIStatusBarStyle { return .lightContent }
 }
 
+extension UIView {
+    func setEmptyLayer() {
+        self.layer.cornerRadius = 5
+        self.layer.borderColor = UIColor.white.cgColor
+        self.layer.borderWidth = 1
+        self.layer.masksToBounds = true
+    }
+}

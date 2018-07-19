@@ -15,8 +15,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-//        UINavigationBar.appearance().barStyle = .blackOpaque
-        
+        if let viewController = self.window?.rootViewController as? ViewController {
+            viewController.cardDeck = CardDeck()
+        }
         return true
     }
 
