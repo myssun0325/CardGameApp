@@ -15,8 +15,7 @@
 		737F20A520FF9518009E6813 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737F20A420FF9518009E6813 /* Card.swift */; };
 		737F20A720FF9CD0009E6813 /* CardDeck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737F20A620FF9CD0009E6813 /* CardDeck.swift */; };
 		737F20AA21002AA5009E6813 /* CardDeckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737F20A921002AA5009E6813 /* CardDeckView.swift */; };
-		737F20AC210032E1009E6813 /* FoundationCardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737F20AB210032E1009E6813 /* FoundationCardsView.swift */; };
-		737F20AE21004F59009E6813 /* CardStacksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737F20AD21004F59009E6813 /* CardStacksView.swift */; };
+		737F20B021007E33009E6813 /* CardContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737F20AF21007E33009E6813 /* CardContainerView.swift */; };
 		C8AEF50C4754CC6BD359A7AA /* Pods_CardGameApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E60317B0C17930097C3565C /* Pods_CardGameApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -32,8 +31,7 @@
 		737F20A420FF9518009E6813 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		737F20A620FF9CD0009E6813 /* CardDeck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDeck.swift; sourceTree = "<group>"; };
 		737F20A921002AA5009E6813 /* CardDeckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDeckView.swift; sourceTree = "<group>"; };
-		737F20AB210032E1009E6813 /* FoundationCardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoundationCardsView.swift; sourceTree = "<group>"; };
-		737F20AD21004F59009E6813 /* CardStacksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStacksView.swift; sourceTree = "<group>"; };
+		737F20AF21007E33009E6813 /* CardContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardContainerView.swift; sourceTree = "<group>"; };
 		97D29888FD0FAC95DCF60A35 /* Pods-CardGameApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardGameApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CardGameApp/Pods-CardGameApp.debug.xcconfig"; sourceTree = "<group>"; };
 		ACDDCE0F06FF0501BCDFF06A /* Pods-CardGameApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardGameApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-CardGameApp/Pods-CardGameApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -103,9 +101,8 @@
 		737F20A8210029FA009E6813 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				737F20AF21007E33009E6813 /* CardContainerView.swift */,
 				737F20A921002AA5009E6813 /* CardDeckView.swift */,
-				737F20AB210032E1009E6813 /* FoundationCardsView.swift */,
-				737F20AD21004F59009E6813 /* CardStacksView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -227,12 +224,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				7333ECBA20FCEDBE006EFEF4 /* ViewController.swift in Sources */,
-				737F20AC210032E1009E6813 /* FoundationCardsView.swift in Sources */,
+				737F20B021007E33009E6813 /* CardContainerView.swift in Sources */,
 				737F20AA21002AA5009E6813 /* CardDeckView.swift in Sources */,
 				737F20A520FF9518009E6813 /* Card.swift in Sources */,
 				737F20A720FF9CD0009E6813 /* CardDeck.swift in Sources */,
 				7333ECB820FCEDBE006EFEF4 /* AppDelegate.swift in Sources */,
-				737F20AE21004F59009E6813 /* CardStacksView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

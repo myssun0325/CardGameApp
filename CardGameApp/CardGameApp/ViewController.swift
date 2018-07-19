@@ -21,7 +21,6 @@ struct ImageName {
 
 protocol CardDeckProtocol {
     func resetCards()
-    func shuffleCards()
     func removeTopCard() -> Card?
     func removeTopCards(count: Int) -> [Card]
 }
@@ -32,6 +31,7 @@ class ViewController: UIViewController {
     private let topSpacingOfFoundationViews: CGFloat = 20
     private let topSpacingOfCardStackViews: CGFloat = 100
     private let numberOfCardStacks = 7
+    private let numberOfFoundations = 4
     
     var cardDeck: CardDeckProtocol!
     
@@ -44,22 +44,23 @@ class ViewController: UIViewController {
     }()
     
     // MARK: FoundationCardsView
-    lazy var foundationCardsView: FoundationCardsView = {
-        let foundationViews = FoundationCardsView()
-        foundationViews.frame = CGRect(x: CardSize.spacing, y: topSpacingOfFoundationViews,
-                                       width: foundationViews.totalWidth,
-                                       height: CardSize.height)
-        return foundationViews
+    lazy var foundationCardsView: CardContainerView<UIView> = {
+        let cardContainerView = CardContainerView<UIView>(frame: CGRect(x: CardSize.spacing,
+                                                                        y: topSpacingOfFoundationViews,
+                                                                        width: CGFloat(numberOfFoundations) * widthSpacing,
+                                                                        height: CardSize.height))
+        cardContainerView.setupContainers(numberOfCards: self.numberOfFoundations)
+        return cardContainerView
     }()
     
     // MARK: CardStacksView
-    lazy var cardStacksView: CardStacksView = {
-        let cardStacksView = CardStacksView()
-        cardStacksView.frame = CGRect(x: CardSize.spacing,
-                                      y: topSpacingOfCardStackViews,
-                                      width: cardStacksView.totalWidth,
-                                      height: CardSize.height)
-        return cardStacksView
+    lazy var cardStacksView: CardContainerView<UIImageView> = {
+        let cardContainerView = CardContainerView<UIImageView>(frame: CGRect(x: CardSize.spacing,
+                                                                             y: topSpacingOfCardStackViews,
+                                                                             width: CGFloat(numberOfCardStacks) * widthSpacing,
+                                                                             height: CardSize.height))
+        cardContainerView.setupContainers(numberOfCards: self.numberOfCardStacks)
+        return cardContainerView
     }()
     
     private func setupBackGroundPatternImage() {
@@ -77,15 +78,8 @@ class ViewController: UIViewController {
     
     private func setupDefaultImages() {
         cardDeck.resetCards()
-        cardDeck.shuffleCards()
         let removedCards = cardDeck.removeTopCards(count: numberOfCardStacks)
-        var images = [UIImage]()
-        for card in removedCards {
-            card.flip()
-            if let imageOfCard = card.imageOfCard() {
-                images.append(imageOfCard)
-            }
-        }
+        let images = removedCards.imagesOfCards()
         self.cardStacksView.setImagesOfAllStack(images)
     }
     
@@ -105,11 +99,14 @@ class ViewController: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle { return .lightContent }
 }
 
-extension UIView {
-    func setEmptyLayer() {
-        self.layer.cornerRadius = 5
-        self.layer.borderColor = UIColor.white.cgColor
-        self.layer.borderWidth = 1
-        self.layer.masksToBounds = true
+extension Array where Element == Card {
+    func imagesOfCards() -> [UIImage] {
+        var images = [UIImage]()
+        for card in self {
+            if let image = card.imageOfCard() {
+                images.append(image)
+            }
+        }
+        return images
     }
 }

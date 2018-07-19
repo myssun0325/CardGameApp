@@ -9,7 +9,6 @@
 import Foundation
 
 class CardDeck: CardDeckProtocol {
-    
     private var cards: [Card] = []
     
     init() {
@@ -28,10 +27,11 @@ class CardDeck: CardDeckProtocol {
             }
         }
         self.cards = cards
+        self.shuffleCards()
     }
     
     // Fisher–Yates shuffle
-    func shuffleCards() {
+    private func shuffleCards() {
         var shuffled = [Card]()
         for count in stride(from: UInt32(self.cards.count), to: 0, by: -1) {
             shuffled.append(self.cards.remove(at: Int(arc4random_uniform(count))))
@@ -40,6 +40,7 @@ class CardDeck: CardDeckProtocol {
     }
     
     func removeTopCard() -> Card? {
+        self.cards.last?.flip()
         return self.cards.popLast()
     }
     
@@ -53,4 +54,3 @@ class CardDeck: CardDeckProtocol {
         return removedCards
     }
 }
-
