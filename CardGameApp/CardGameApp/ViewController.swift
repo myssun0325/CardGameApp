@@ -95,6 +95,12 @@ class ViewController: UIViewController {
         setupDefaultImages()
     }
     
+    override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
+        if motion == .motionShake {
+            setupDefaultImages()
+        }
+    }
+    
     // Set Status Bar Color
     override var preferredStatusBarStyle: UIStatusBarStyle { return .lightContent }
 }
