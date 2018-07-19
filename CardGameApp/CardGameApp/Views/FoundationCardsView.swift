@@ -13,9 +13,8 @@ class FoundationCardsView: UIView {
     private let numberOfFoundation = 4
     private let distanceOfconatinersX: CGFloat = CardSize.width + CardSize.spacing
     private var foundationContainerView: [UIView] = []
-    var totalWidth: CGFloat {
-        return distanceOfconatinersX * CGFloat(numberOfFoundation)
-    }
+    
+    lazy var totalWidth: CGFloat = distanceOfconatinersX * CGFloat(numberOfFoundation)
     
     private func defaultSetup() {
         for count in 0..<numberOfFoundation {

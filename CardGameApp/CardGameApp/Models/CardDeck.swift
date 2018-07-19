@@ -8,7 +8,7 @@
 
 import Foundation
 
-class CardDeck {
+class CardDeck: CardDeckProtocol {
     
     private var cards: [Card] = []
     
@@ -41,6 +41,16 @@ class CardDeck {
     
     func removeTopCard() -> Card? {
         return self.cards.popLast()
+    }
+    
+    func removeTopCards(count: Int) -> [Card] {
+        var removedCards = [Card]()
+        for _ in 0..<count {
+            if let removedCard = removeTopCard() {
+                removedCards.append(removedCard)
+            }
+        }
+        return removedCards
     }
 }
 

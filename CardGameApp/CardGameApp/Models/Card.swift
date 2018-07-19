@@ -24,6 +24,10 @@ class Card {
         case false: return UIImage(named: self.description)
         }
     }
+    
+    func flip() {
+        self.isShowingBack = !self.isShowingBack
+    }
 }
 
 extension Card {

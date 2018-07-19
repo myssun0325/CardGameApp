@@ -19,15 +19,21 @@ struct ImageName {
     static let cardBack = "card-back"
 }
 
+protocol CardDeckProtocol {
+    func resetCards()
+    func shuffleCards()
+    func removeTopCard() -> Card?
+    func removeTopCards(count: Int) -> [Card]
+}
+
 class ViewController: UIViewController {
     
     private let widthSpacing: CGFloat = CardSize.width + CardSize.spacing
     private let topSpacingOfFoundationViews: CGFloat = 20
     private let topSpacingOfCardStackViews: CGFloat = 100
-    private let numberOfFoundationContainer: Int = 4
-    private let numberOfCardStackViews: Int = 7
+    private let numberOfCardStacks = 7
     
-    var cardDeck: CardDeck!
+    var cardDeck: CardDeckProtocol!
     
     // MARK: CardDeckView
     lazy var cardDeckView: CardDeckView = {
@@ -46,6 +52,16 @@ class ViewController: UIViewController {
         return foundationViews
     }()
     
+    // MARK: CardStacksView
+    lazy var cardStacksView: CardStacksView = {
+        let cardStacksView = CardStacksView()
+        cardStacksView.frame = CGRect(x: CardSize.spacing,
+                                      y: topSpacingOfCardStackViews,
+                                      width: cardStacksView.totalWidth,
+                                      height: CardSize.height)
+        return cardStacksView
+    }()
+    
     private func setupBackGroundPatternImage() {
         guard let backgroundImage = UIImage(named: ImageName.background) else { return }
         self.view.backgroundColor = UIColor(patternImage: backgroundImage)
@@ -56,13 +72,29 @@ class ViewController: UIViewController {
         setupBackGroundPatternImage()
         view.addSubview(cardDeckView)
         view.addSubview(foundationCardsView)
+        view.addSubview(cardStacksView)
+    }
+    
+    private func setupDefaultImages() {
+        cardDeck.resetCards()
+        cardDeck.shuffleCards()
+        let removedCards = cardDeck.removeTopCards(count: numberOfCardStacks)
+        var images = [UIImage]()
+        for card in removedCards {
+            card.flip()
+            if let imageOfCard = card.imageOfCard() {
+                images.append(imageOfCard)
+            }
+        }
+        self.cardStacksView.setImagesOfAllStack(images)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+        setupDefaultImages()
     }
-
+    
     // Set Status Bar Color
     override var preferredStatusBarStyle: UIStatusBarStyle { return .lightContent }
 }
