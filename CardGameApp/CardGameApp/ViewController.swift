@@ -68,6 +68,16 @@ class ViewController: UIViewController {
         return cardContainerView
     }()
     
+    // MARK: WastePileView
+    lazy var wastePileView: UIImageView = {
+       let wastePileView = UIImageView(frame: CGRect(x: self.view.frame.width - widthSpacing * 2,
+                                                     y: topSpacingOfFoundationViews,
+                                                     width: CardSize.width,
+                                                     height: CardSize.height))
+        wastePileView.setEmptyLayer()
+        return wastePileView
+    }()
+    
     private func setupBackGroundPatternImage() {
         guard let backgroundImage = UIImage(named: ImageName.background) else { return }
         self.view.backgroundColor = UIColor(patternImage: backgroundImage)
@@ -79,6 +89,7 @@ class ViewController: UIViewController {
         view.addSubview(cardDeckView)
         view.addSubview(foundationCardsView)
         view.addSubview(cardStacksView)
+        view.addSubview(wastePileView)
     }
     
     private func setupDefaultImages() {
