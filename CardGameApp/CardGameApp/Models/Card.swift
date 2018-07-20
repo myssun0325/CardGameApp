@@ -6,7 +6,7 @@
 //  Copyright © 2018년 moon. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 class Card {
     private let suit: Suit
@@ -18,10 +18,10 @@ class Card {
         self.number = number
     }
     
-    func imageOfCard() -> UIImage? {
+    func nameOfCardImage() -> String {
         switch self.isShowingBack {
-        case true:  return UIImage(named: ImageName.cardBack)
-        case false: return UIImage(named: self.description)
+        case true:  return ImageName.cardBack
+        case false: return self.description
         }
     }
     

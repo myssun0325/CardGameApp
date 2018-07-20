@@ -121,8 +121,8 @@ extension Array where Element == Card {
     func imagesOfCards() -> [UIImage] {
         var images = [UIImage]()
         for card in self {
-            if let image = card.imageOfCard() {
-                images.append(image)
+            if let cardImage = UIImage(named: card.nameOfCardImage()) {
+                images.append(cardImage)
             }
         }
         return images
