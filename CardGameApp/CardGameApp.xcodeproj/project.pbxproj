@@ -12,6 +12,7 @@
 		7333ECBD20FCEDBE006EFEF4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7333ECBB20FCEDBE006EFEF4 /* Main.storyboard */; };
 		7333ECBF20FCEDBF006EFEF4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7333ECBE20FCEDBF006EFEF4 /* Assets.xcassets */; };
 		7333ECC220FCEDBF006EFEF4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7333ECC020FCEDBF006EFEF4 /* LaunchScreen.storyboard */; };
+		734F90EB2100EAB600EA9DDF /* CardStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734F90EA2100EAB600EA9DDF /* CardStack.swift */; };
 		737F20A520FF9518009E6813 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737F20A420FF9518009E6813 /* Card.swift */; };
 		737F20A720FF9CD0009E6813 /* CardDeck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737F20A620FF9CD0009E6813 /* CardDeck.swift */; };
 		737F20AA21002AA5009E6813 /* CardDeckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737F20A921002AA5009E6813 /* CardDeckView.swift */; };
@@ -28,6 +29,7 @@
 		7333ECBE20FCEDBF006EFEF4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7333ECC120FCEDBF006EFEF4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7333ECC320FCEDC0006EFEF4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		734F90EA2100EAB600EA9DDF /* CardStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStack.swift; sourceTree = "<group>"; };
 		737F20A420FF9518009E6813 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		737F20A620FF9CD0009E6813 /* CardDeck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDeck.swift; sourceTree = "<group>"; };
 		737F20A921002AA5009E6813 /* CardDeckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDeckView.swift; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 			children = (
 				737F20A420FF9518009E6813 /* Card.swift */,
 				737F20A620FF9CD0009E6813 /* CardDeck.swift */,
+				734F90EA2100EAB600EA9DDF /* CardStack.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -229,6 +232,7 @@
 				737F20A520FF9518009E6813 /* Card.swift in Sources */,
 				737F20A720FF9CD0009E6813 /* CardDeck.swift in Sources */,
 				7333ECB820FCEDBE006EFEF4 /* AppDelegate.swift in Sources */,
+				734F90EB2100EAB600EA9DDF /* CardStack.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

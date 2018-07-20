@@ -25,6 +25,10 @@ protocol CardDeckProtocol {
     func removeTopCards(count: Int) -> [Card]
 }
 
+protocol WastePileProtocol {
+    func addCard(_ card: Card)
+}
+
 class ViewController: UIViewController {
     
     private let widthSpacing: CGFloat = CardSize.width + CardSize.spacing
@@ -33,7 +37,8 @@ class ViewController: UIViewController {
     private let numberOfCardStacks = 7
     private let numberOfFoundations = 4
     
-    var cardDeck: CardDeckProtocol!
+    var cardDeck: CardDeckProtocol = CardDeck()
+    var wastePile: WastePileProtocol = CardDeck([])
     
     // MARK: CardDeckView
     lazy var cardDeckView: CardDeckView = {
@@ -89,6 +94,8 @@ class ViewController: UIViewController {
         setupDefaultImages()
     }
     
+    // MARK: Event Handling
+    // Shake Motion
     override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
             setupDefaultImages()

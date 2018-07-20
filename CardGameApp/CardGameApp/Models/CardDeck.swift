@@ -8,8 +8,12 @@
 
 import Foundation
 
-class CardDeck: CardDeckProtocol {
+class CardDeck {
     private var cards: [Card] = []
+    
+    init(_ cards: [Card]) {
+        self.cards = cards
+    }
     
     init() {
         resetCards()
@@ -19,6 +23,17 @@ class CardDeck: CardDeckProtocol {
         return self.cards.last
     }
     
+    // Fisher–Yates shuffle
+    private func shuffleCards() {
+        var shuffled = [Card]()
+        for count in stride(from: UInt32(self.cards.count), to: 0, by: -1) {
+            shuffled.append(self.cards.remove(at: Int(arc4random_uniform(count))))
+        }
+        self.cards = shuffled
+    }
+}
+
+extension CardDeck: CardDeckProtocol {
     func resetCards() {
         var cards: [Card] = [Card]()
         for suit in Card.Suit.allCases {
@@ -30,18 +45,10 @@ class CardDeck: CardDeckProtocol {
         self.shuffleCards()
     }
     
-    // Fisher–Yates shuffle
-    private func shuffleCards() {
-        var shuffled = [Card]()
-        for count in stride(from: UInt32(self.cards.count), to: 0, by: -1) {
-            shuffled.append(self.cards.remove(at: Int(arc4random_uniform(count))))
-        }
-        self.cards = shuffled
-    }
-    
     func removeTopCard() -> Card? {
-        self.cards.last?.flip()
-        return self.cards.popLast()
+        guard let topCard = self.cards.popLast() else { return nil }
+        topCard.flip()
+        return topCard
     }
     
     func removeTopCards(count: Int) -> [Card] {
@@ -52,5 +59,11 @@ class CardDeck: CardDeckProtocol {
             }
         }
         return removedCards
+    }
+}
+
+extension CardDeck: WastePileProtocol {
+    func addCard(_ card: Card) {
+        self.cards.append(card)
     }
 }
