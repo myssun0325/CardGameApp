@@ -16,3 +16,6 @@
 <img src="images/demo_step2.png" width="50%">
 
 - [swift random unification](https://github.com/apple/swift-evolution/blob/master/proposals/0202-random-unification.md)
+
+## Step. 3
+- Model이 VC에게 Notification을 주는 시점

@@ -11,7 +11,8 @@ import UIKit
 class CardDeckView: UIImageView {
     private func defaultSetup() {
         self.image = UIImage(named: ImageName.cardBack)
-        self.setEmptyLayer()
+        setEmptyLayer()
+        self.isUserInteractionEnabled = true
     }
     
     override init(frame: CGRect) {

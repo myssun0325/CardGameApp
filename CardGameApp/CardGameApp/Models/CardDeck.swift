@@ -9,7 +9,13 @@
 import Foundation
 
 class CardDeck {
-    private var cards: [Card] = []
+    private var cards: [Card] = [] {
+        didSet {
+            if cards.count == 0 {
+                NotificationCenter.default.post(name: .cardDeckIsEmpty, object: self)
+            }
+        }
+    }
     
     init(_ cards: [Card]) {
         self.cards = cards
@@ -46,7 +52,9 @@ extension CardDeck: CardDeckProtocol {
     }
     
     func removeTopCard() -> Card? {
-        guard let topCard = self.cards.popLast() else { return nil }
+        guard let topCard = self.cards.popLast() else {
+            return nil
+        }
         topCard.flip()
         return topCard
     }
@@ -60,10 +68,20 @@ extension CardDeck: CardDeckProtocol {
         }
         return removedCards
     }
+    
+    func addCards(_ cards: [Card]) {
+        self.cards.append(contentsOf: cards)
+        NotificationCenter.default.post(name: .cardDeckIsFilled, object: self)
+    }
 }
 
 extension CardDeck: WastePileProtocol {
     func addCard(_ card: Card) {
         self.cards.append(card)
+        NotificationCenter.default.post(name: .didChangeWastePile, object: self, userInfo: ["imageName":card.nameOfCardImage()])
+    }
+    
+    func removeAllCards() -> [Card] {
+        return self.removeTopCards(count: self.cards.count)
     }
 }
