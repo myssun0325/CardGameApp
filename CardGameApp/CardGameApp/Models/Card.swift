@@ -8,25 +8,24 @@
 
 import Foundation
 
-class Card {
+class Card: CustomStringConvertible {
+    
     private let suit: Suit
     private let number: Number
-    private var isShowingBack: Bool = true
+    
+    let backImageName:String = "card-back"
     
     init(suit: Suit, number: Number) {
         self.suit = suit
         self.number = number
     }
     
-    func nameOfCardImage() -> String {
-        switch self.isShowingBack {
-        case true:  return ImageName.cardBack
-        case false: return self.description
-        }
+    var frontImageName: String {
+        return self.description
     }
     
-    func flip() {
-        self.isShowingBack = !self.isShowingBack
+    var description: String {
+        return self.suit.description + self.number.description
     }
 }
 
@@ -57,10 +56,4 @@ extension Card {
         }
     }
     
-}
-
-extension Card: CustomStringConvertible {
-    var description: String {
-        return self.suit.description + self.number.description
-    }
 }
