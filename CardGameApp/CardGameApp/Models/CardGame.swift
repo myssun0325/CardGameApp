@@ -15,6 +15,7 @@ class CardGame {
     func gameReset() {
         cardDeck.reset()
         wastePile.removeAll()
+        NotificationCenter.default.post(name: .gameReset, object: self)
     }
     
     func openCardDeck() {
@@ -24,6 +25,7 @@ class CardGame {
             cardDeck.push(cards: wastePile)
             wastePile.removeAll()
         }
+        NotificationCenter.default.post(name: .cardDeckIsOpend, object: self)
     }
     
     func topCardImageNameOfCardDeck() -> String {
