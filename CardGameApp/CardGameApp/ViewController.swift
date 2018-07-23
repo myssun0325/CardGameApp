@@ -41,8 +41,7 @@ class ViewController: UIViewController {
     private let numberOfCardStacks = 7
     private let numberOfFoundations = 4
     
-    var cardDeck: CardDeckProtocol = CardDeck()
-    var wastePile: WastePileProtocol = CardDeck([])
+    private var cardGame: CardGame = CardGame()
     
     // MARK: CardDeckView
     lazy var cardDeckView: CardDeckView = {
@@ -88,8 +87,7 @@ class ViewController: UIViewController {
         self.view.backgroundColor = UIColor(patternImage: backgroundImage)
     }
     
-    private func setup() {
-//        view.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 0, leading: CardSize.spacing, bottom: 0, trailing: CardSize.spacing)
+    private func setupEmptyViews() {
         setupBackGroundPatternImage()
         view.addSubview(cardDeckView)
         view.addSubview(foundationCardsView)
@@ -97,98 +95,61 @@ class ViewController: UIViewController {
         view.addSubview(wastePileView)
     }
     
-    private func setupDefaultImages() {
-        cardDeck.resetCards()
-        let removedCards = cardDeck.removeTopCards(count: numberOfCardStacks)
-        let images = removedCards.imagesOfCards()
-        self.cardStacksView.setImagesOfAllStack(images)
-    }
-    
     private func setupNotification() {
-        NotificationCenter.default.addObserver(self, selector: #selector(self.cardDeckIsEmpty(_:)), name: .cardDeckIsEmpty, object: cardDeck)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.didChangeWastePile(_:)), name: .didChangeWastePile, object: wastePile)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.cardDeckIsFilled(_:)), name: .cardDeckIsFilled, object: cardDeck)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.cardDeckIsOpend(_:)), name: .cardDeckIsOpend, object: cardGame)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.cardDeckIsOpend(_:)), name: .gameReset, object: cardGame)
+    }
+
+    private func setupGestureRecognizer() {
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.tappedCardDeckView(_:)))
+        self.cardDeckView.addGestureRecognizer(tapRecognizer)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setup()
-        setupDefaultImages()
-        setupNotification()
+        setupEmptyViews()
         setupGestureRecognizer()
-        // tap
-        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.tappedCardDeckView(_:)))
-        self.cardDeckView.addGestureRecognizer(tapRecognizer)
-        
-        for _ in 0..<43 {
-            tappedCardDeckView(nil)
-        }
+        cardGame.gameReset()
+        setupNotification()
     }
     
     // MARK: Event Handling
     // Shake Motion
     override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
-            setupDefaultImages()
+            cardGame.gameReset()
         }
     }
     
-    // Tap Gesture
-    func setupGestureRecognizer() {
-        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.tappedCardDeckView(_:)))
-        self.cardDeckView.addGestureRecognizer(tapRecognizer)
-    }
-    
+    // MARK: Tap Gesture Handling
     @objc func tappedCardDeckView(_ sender: UITapGestureRecognizer?) {
-        if let removedCard = cardDeck.removeTopCard() {
-            wastePile.addCard(removedCard)
-        } else {
-            cardDeck.addCards(wastePile.removeAllCards())
-        }
+        cardGame.openCardDeck()
     }
     
     // MARK: Notification Handling
-    @objc func cardDeckIsEmpty(_ notification: Notification) {
-        updateCardDeckView(UIImage(named: ImageName.deckRefresh))
-    }
-    
-    @objc func cardDeckIsFilled(_ notification: Notification) {
-        updateCardDeckView(UIImage(named: ImageName.cardBack))
-        updateWastePileView(nil)
+    @objc func cardDeckIsOpend(_ notification: Notification) {
+        updateCardDeckView()
+        updateWastePileView()
     }
 
-    @objc func didChangeWastePile(_ notification: Notification) {
-        guard let imageName = notification.userInfo?["imageName"] as? String else { return }
-        updateWastePileView(UIImage(named: imageName))
-    }
-    
     // MARK: View Update
-    private func updateCardDeckView(_ image: UIImage?) {
-        self.cardDeckView.image = image
+    private func updateCardDeckView() {
+        cardDeckView.image = UIImage(named: cardGame.topCardImageNameOfCardDeck())
     }
     
-    private func updateWastePileView(_ image: UIImage?) {
-        self.wastePileView.image = image
+    private func updateWastePileView() {
+        guard let name = cardGame.topCardImageNameOfWastePile() else {
+            wastePileView.image = nil
+            return
+        }
+        wastePileView.image = UIImage(named: name)
     }
     
     // Set Status Bar Color
     override var preferredStatusBarStyle: UIStatusBarStyle { return .lightContent }
 }
 
-extension Array where Element == Card {
-    func imagesOfCards() -> [UIImage] {
-        var images = [UIImage]()
-        for card in self {
-            if let cardImage = UIImage(named: card.nameOfCardImage()) {
-                images.append(cardImage)
-            }
-        }
-        return images
-    }
-}
-
 extension Notification.Name {
-    static let cardDeckIsEmpty = Notification.Name("cardDeckIsEmpty")
-    static let didChangeWastePile = Notification.Name("didChangeWastePile")
-    static let cardDeckIsFilled = Notification.Name("cardDeckIsFilled")
+    static let cardDeckIsOpend = Notification.Name("carDeckIsOpend")
+    static let gameReset = Notification.Name("gameReset")
 }
