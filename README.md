@@ -18,4 +18,14 @@
 - [swift random unification](https://github.com/apple/swift-evolution/blob/master/proposals/0202-random-unification.md)
 
 ## Step. 3
-- Model이 VC에게 Notification을 주는 시점
+- 객체설명
+	- Card: 카드를 나타내기 위한 객체
+	- CardDeck: 여러장의 카드를 나타내기 위한 객체 (처음 52장의 카드를 모아두는 카드덱)
+	- CardStack: 필드에 놓여져있는 카드스택 하나
+	- CardStackManager: 7개의 카드스택을 관리하는 객체
+	- WastePile: 카드덱에서 제거됐지만 아직 카드스택이나 Foundation에 속하지 않은 카드들을 모아둔 객체
+	- CardView: 카드한장을 나타내는 뷰
+	- CardStackView: 카드스택을 나타내기 위한 뷰
+	- CardStacksView: CardStackView들을 담고 있는 superview
+
+<img src="images/demo_step2.png" width="50%">

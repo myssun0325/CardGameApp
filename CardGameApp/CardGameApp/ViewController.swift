@@ -38,7 +38,6 @@ class ViewController: UIViewController {
     private let widthSpacing: CGFloat = CardSize.width + CardSize.spacing
     private let topSpacingOfFoundationViews: CGFloat = 20
     private let topSpacingOfCardStackViews: CGFloat = 100
-    private let numberOfCardStacks = 7
     private let numberOfFoundations = 4
     
     private var cardGame: CardGame = CardGame()
@@ -62,12 +61,12 @@ class ViewController: UIViewController {
     }()
     
     // MARK: CardStacksView
-    lazy var cardStacksView: CardContainerView<UIImageView> = {
-        let cardContainerView = CardContainerView<UIImageView>(frame: CGRect(x: CardSize.spacing,
+    lazy var cardStacksView: CardContainerView<UIView> = {
+        let cardContainerView = CardContainerView<UIView>(frame: CGRect(x: CardSize.spacing,
                                                                              y: topSpacingOfCardStackViews,
-                                                                             width: CGFloat(numberOfCardStacks) * widthSpacing,
+                                                                             width: CGFloat(CardGame.numberOfCardStacks) * widthSpacing,
                                                                              height: CardSize.height))
-        cardContainerView.setupContainers(numberOfCards: self.numberOfCardStacks)
+        cardContainerView.setupContainers(numberOfCards: CardGame.numberOfCardStacks)
         return cardContainerView
     }()
     
@@ -97,7 +96,7 @@ class ViewController: UIViewController {
     
     private func setupNotification() {
         NotificationCenter.default.addObserver(self, selector: #selector(self.cardDeckIsOpend(_:)), name: .cardDeckIsOpend, object: cardGame)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.cardDeckIsOpend(_:)), name: .gameReset, object: cardGame)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.gameReset(_:)), name: .gameReset, object: cardGame)
     }
 
     private func setupGestureRecognizer() {
@@ -109,8 +108,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         setupEmptyViews()
         setupGestureRecognizer()
-        cardGame.gameReset()
         setupNotification()
+        cardGame.gameReset()
     }
     
     // MARK: Event Handling
@@ -131,6 +130,12 @@ class ViewController: UIViewController {
         updateCardDeckView()
         updateWastePileView()
     }
+    
+    @objc func gameReset(_ notification: Notification) {
+        updateCardDeckView()
+        updateWastePileView()
+        updateCardStacksView()
+    }
 
     // MARK: View Update
     private func updateCardDeckView() {
@@ -143,6 +148,22 @@ class ViewController: UIViewController {
             return
         }
         wastePileView.image = UIImage(named: name)
+    }
+    
+    // 이 부분을 어떻게 처리할 수 있을까요...ㅠㅠ
+    private func updateCardStacksView() {
+        for (stackIndex, cardStackView) in self.cardStacksView.enumerated() {
+            cardStackView.subviews.forEach { $0.removeFromSuperview() }
+            for (index, card) in cardGame.cardStack(at: stackIndex).enumerated() {
+                let resizeHeight = 20 * CGFloat(index)
+                let cardView = CardView(image: UIImage(named: card.frontImageName))
+                cardStackView.addSubview(cardView)
+                cardStackView.frame.size = CGSize(width: CardSize.width,
+                                                  height: CardSize.height + resizeHeight)
+                cardView.frame.origin.y = resizeHeight
+            }
+            cardStackView.flipTopCard()
+        }
     }
     
     // Set Status Bar Color

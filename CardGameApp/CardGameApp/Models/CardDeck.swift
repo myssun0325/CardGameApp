@@ -51,4 +51,14 @@ class CardDeck {
     func push(cards: [Card]) {
         self.cards.append(contentsOf: cards)
     }
+    
+    func popCards(count: Int) -> [Card] {
+        var cards: [Card] = []
+        for _ in 0..<count {
+            if let card = popTopCard() {
+                cards.append(card)
+            }
+        }
+        return cards
+    }
 }

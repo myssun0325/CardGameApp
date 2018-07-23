@@ -12,7 +12,7 @@ protocol CardContainer {
     func setupContainers(numberOfCards: Int)
 }
 
-class CardContainerView<T: UIView>: UIView, CardContainer {
+class CardContainerView<T: UIView>: UIView, CardContainer, IteratorProtocol, Sequence {
     private let distanceOfX: CGFloat = CardSize.width + CardSize.spacing
     private var containers: [T] = []
     
@@ -35,13 +35,30 @@ class CardContainerView<T: UIView>: UIView, CardContainer {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
+    
+    // Iterator, Sequence
+    private var index: Int = 0
+    func next() -> T? {
+        if index < self.containers.endIndex {
+            defer { index = self.containers.index(after: index) }
+            return self.containers[index]
+        } else {
+            self.index = 0
+            return nil
+        }
+    }
+    
+    subscript(index: Int) -> T {
+        return containers[index]
+    }
 }
 
-extension CardContainerView where T == UIImageView {
-    func setImagesOfAllStack(_ images: [UIImage]) {
-        for index in images.indices {
-            self.containers[index].image = images[index]
+extension UIView {
+    func flipTopCard() {
+        guard let topCard = self.subviews.last as? CardView else {
+            return
         }
+        topCard.flip()
     }
 }
 

@@ -8,11 +8,19 @@
 
 import Foundation
 
-class CardStack {
-    private var cards: [Card] = [] {
-        didSet {
-            oldValue.last?.flip() // 이전 마지막 카드 다시 뒤집기
-        }
+class CardStack: IteratorProtocol, Sequence {
+    private var cards: [Card] = []
+    
+    init(_ cards: [Card]) {
+        self.cards = cards
+    }
+    
+    var count: Int {
+        return self.cards.count
+    }
+    
+    var topCard: Card? {
+        return cards.last
     }
     
     func reset() {
@@ -21,5 +29,17 @@ class CardStack {
     
     func add(card: Card) {
         self.cards.append(card)
+    }
+    
+    // Iterator, Sequence
+    private var index: Int = 0
+    func next() -> Card? {
+        if index < self.cards.endIndex {
+            defer { index = self.cards.index(after: index) }
+            return self.cards[index]
+        } else {
+            self.index = 0
+            return nil
+        }
     }
 }
