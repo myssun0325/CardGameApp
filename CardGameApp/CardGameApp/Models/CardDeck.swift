@@ -9,38 +9,21 @@
 import Foundation
 
 class CardDeck {
-    private var cards: [Card] = [] {
-        didSet {
-            if cards.count == 0 {
-                NotificationCenter.default.post(name: .cardDeckIsEmpty, object: self)
-            }
-        }
-    }
+    private var cards: [Card] = []
     
     init(_ cards: [Card]) {
         self.cards = cards
     }
     
     init() {
-        resetCards()
+        reset()
     }
     
     var topCard: Card? {
-        return self.cards.last
+        return cards.last
     }
     
-    // Fisher–Yates shuffle
-    private func shuffleCards() {
-        var shuffled = [Card]()
-        for count in stride(from: UInt32(self.cards.count), to: 0, by: -1) {
-            shuffled.append(self.cards.remove(at: Int(arc4random_uniform(count))))
-        }
-        self.cards = shuffled
-    }
-}
-
-extension CardDeck: CardDeckProtocol {
-    func resetCards() {
+    func reset() {
         var cards: [Card] = [Card]()
         for suit in Card.Suit.allCases {
             for number in Card.Number.allCases {
@@ -51,37 +34,21 @@ extension CardDeck: CardDeckProtocol {
         self.shuffleCards()
     }
     
-    func removeTopCard() -> Card? {
-        guard let topCard = self.cards.popLast() else {
-            return nil
+    // Fisher–Yates shuffle
+    private func shuffleCards() {
+        var shuffled = [Card]()
+        for count in stride(from: UInt32(self.cards.count), to: 0, by: -1) {
+            shuffled.append(self.cards.remove(at: Int(arc4random_uniform(count))))
         }
-        topCard.flip()
+        self.cards = shuffled
+    }
+    
+    func popTopCard() -> Card? {
+        guard let topCard = self.cards.popLast() else { return nil }
         return topCard
     }
     
-    func removeTopCards(count: Int) -> [Card] {
-        var removedCards = [Card]()
-        for _ in 0..<count {
-            if let removedCard = removeTopCard() {
-                removedCards.append(removedCard)
-            }
-        }
-        return removedCards
-    }
-    
-    func addCards(_ cards: [Card]) {
+    func push(cards: [Card]) {
         self.cards.append(contentsOf: cards)
-        NotificationCenter.default.post(name: .cardDeckIsFilled, object: self)
-    }
-}
-
-extension CardDeck: WastePileProtocol {
-    func addCard(_ card: Card) {
-        self.cards.append(card)
-        NotificationCenter.default.post(name: .didChangeWastePile, object: self, userInfo: ["imageName":card.nameOfCardImage()])
-    }
-    
-    func removeAllCards() -> [Card] {
-        return self.removeTopCards(count: self.cards.count)
     }
 }
