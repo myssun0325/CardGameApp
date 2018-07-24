@@ -40,8 +40,8 @@
 		737F20A620FF9CD0009E6813 /* CardDeck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDeck.swift; sourceTree = "<group>"; };
 		737F20A921002AA5009E6813 /* CardDeckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDeckView.swift; sourceTree = "<group>"; };
 		737F20AF21007E33009E6813 /* CardContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardContainerView.swift; sourceTree = "<group>"; };
-		97D29888FD0FAC95DCF60A35 /* Pods-CardGameApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardGameApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CardGameApp/Pods-CardGameApp.debug.xcconfig"; sourceTree = "<group>"; };
-		ACDDCE0F06FF0501BCDFF06A /* Pods-CardGameApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardGameApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-CardGameApp/Pods-CardGameApp.release.xcconfig"; sourceTree = "<group>"; };
+		9A8FCA32C54903284354A543 /* Pods-CardGameApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardGameApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-CardGameApp/Pods-CardGameApp.release.xcconfig"; sourceTree = "<group>"; };
+		9F38E92704025A5078BEAA92 /* Pods-CardGameApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardGameApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CardGameApp/Pods-CardGameApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,8 +122,8 @@
 		74EAB7A1163E4AD7A3E775CA /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				97D29888FD0FAC95DCF60A35 /* Pods-CardGameApp.debug.xcconfig */,
-				ACDDCE0F06FF0501BCDFF06A /* Pods-CardGameApp.release.xcconfig */,
+				9F38E92704025A5078BEAA92 /* Pods-CardGameApp.debug.xcconfig */,
+				9A8FCA32C54903284354A543 /* Pods-CardGameApp.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -386,16 +386,13 @@
 		};
 		7333ECC720FCEDC0006EFEF4 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 97D29888FD0FAC95DCF60A35 /* Pods-CardGameApp.debug.xcconfig */;
+			baseConfigurationReference = 9F38E92704025A5078BEAA92 /* Pods-CardGameApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B3PWYBKFUK;
 				INFOPLIST_FILE = CardGameApp/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.CardGameApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -405,16 +402,13 @@
 		};
 		7333ECC820FCEDC0006EFEF4 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = ACDDCE0F06FF0501BCDFF06A /* Pods-CardGameApp.release.xcconfig */;
+			baseConfigurationReference = 9A8FCA32C54903284354A543 /* Pods-CardGameApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B3PWYBKFUK;
 				INFOPLIST_FILE = CardGameApp/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.CardGameApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;

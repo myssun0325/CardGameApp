@@ -61,4 +61,8 @@ class CardDeck {
         }
         return cards
     }
+    
+    func topCardImageName() -> String {
+        return self.cards.count > 0 ? ImageName.cardBack : ImageName.deckRefresh
+    }
 }

@@ -13,8 +13,6 @@ class Card: CustomStringConvertible {
     private let suit: Suit
     private let number: Number
     
-    let backImageName:String = "card-back"
-    
     init(suit: Suit, number: Number) {
         self.suit = suit
         self.number = number

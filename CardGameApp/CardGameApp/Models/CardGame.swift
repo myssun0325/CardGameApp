@@ -36,10 +36,7 @@ class CardGame {
     }
     
     func topCardImageNameOfCardDeck() -> String {
-        guard let topCard = cardDeck.topCard else {
-            return ImageName.deckRefresh
-        }
-        return topCard.backImageName
+        return cardDeck.topCardImageName()
     }
     
     func topCardImageNameOfWastePile() -> String? {
