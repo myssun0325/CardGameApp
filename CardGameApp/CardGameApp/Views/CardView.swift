@@ -14,29 +14,29 @@ class CardView: UIImageView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.setEmptyLayer()
+        setupDefault()
     }
     
     override init(image: UIImage?) {
         super.init(image: image)
         self.frame.size = CGSize(width: CardSize.width, height: CardSize.height)
-        self.frontImage = image
-        self.image = backImage
-        setEmptyLayer()
+        setupDefault()
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.frontImage = image
-        self.image = backImage
-        setEmptyLayer()
+        setupDefault()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        setupDefault()
+    }
+    
+    private func setupDefault() {
+        setEmptyLayer()
         self.frontImage = image
         self.image = backImage
-        self.setEmptyLayer()
     }
     
     func flip() {
