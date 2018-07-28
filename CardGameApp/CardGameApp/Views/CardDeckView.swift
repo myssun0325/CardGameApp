@@ -8,20 +8,22 @@
 
 import UIKit
 
-class CardDeckView: UIImageView {
+class CardDeckView: UIImageView, EmptyViewSettable {
+    
     private func defaultSetup() {
-        self.image = UIImage(named: ImageName.cardBack)
-        setEmptyLayer()
+        image = UIImage(named: ImageName.deckRefresh)
         self.isUserInteractionEnabled = true
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         defaultSetup()
+        self.setEmptyLayerViews(1)
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         defaultSetup()
+        self.setEmptyLayerViews(1)
     }
 }
