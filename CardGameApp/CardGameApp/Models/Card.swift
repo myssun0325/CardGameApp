@@ -12,14 +12,19 @@ class Card: CustomStringConvertible {
     
     private let suit: Suit
     private let number: Number
+    private var isShowingBack: Bool = true
+    
+    var cardImageName: String {
+        return isShowingBack ? ImageName.cardBack : self.description
+    }
+    
+    func flip() {
+        isShowingBack = !isShowingBack
+    }
     
     init(suit: Suit, number: Number) {
         self.suit = suit
         self.number = number
-    }
-    
-    var frontImageName: String {
-        return self.description
     }
     
     var description: String {

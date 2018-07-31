@@ -8,10 +8,10 @@
 
 import Foundation
 
-class CardStackManager {
+class CardStackContainer {
     private var cardStacks: [CardStack] = []
     
-    func resetCardStacks() {
+    func emptyAllCardStacks() {
         cardStacks.removeAll()
     }
     
@@ -19,11 +19,7 @@ class CardStackManager {
         cardStacks.append(CardStack(cards))
     }
     
-    func imageNameOfCardStack(index: Int) -> String? {
-        return cardStacks[index].topCard?.frontImageName
-    }
-    
-    func cardsStack(at index: Int) -> CardStack {
+    func cardStack(at index: Int) -> CardStack {
         return cardStacks[index]
     }
 }

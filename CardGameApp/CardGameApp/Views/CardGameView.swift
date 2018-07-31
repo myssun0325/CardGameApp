@@ -10,18 +10,13 @@ import UIKit
 
 class CardGameView: UIView {
     // ViewModel
-    private var viewModel: CardGameViewModel!
-    private lazy var frameInformation: FrameInformation = FrameInformation(frame: self.frame)
+    private var cardGameViewModel: CardGameViewModel!
+    private var frameInformation: FrameInformation!
     
     lazy var foundationContainerView = FoundationContainerView(frame: frameInformation.foundationContainerViewFrame)
     lazy var cardStackContainerView = CardStackContainerView(frame: frameInformation.cardStackContainerViewFrame)
     lazy var wastePileView = WastePileView(frame: frameInformation.wastePileViewFrame)
     lazy var cardDeckView = CardDeckView(frame: frameInformation.cardDeckViewFrame)
-    
-    convenience init(frame: CGRect, viewModel: CardGameViewModel) {
-        self.init(frame: frame)
-        self.viewModel = viewModel
-    }
     
     func setupConatinerViews() {
         self.addSubview(foundationContainerView)
@@ -30,6 +25,26 @@ class CardGameView: UIView {
         self.addSubview(cardDeckView)
     }
     
+    func setupNotificationObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(self.gameDidReset(_:)), name: .gameDidReset, object: cardGameViewModel)
+    }
+    
+    @objc func gameDidReset(_ notification: Notification) {
+        self.cardDeckView.makeCardViews()
+    }
+    
+    convenience init(viewModel: CardGameViewModel, frame: CGRect) {
+        self.init(frame: frame)
+        setupNotificationObservers()
+        frameInformation = FrameInformation(frame: frame)
+        setupConatinerViews()
+        cardGameViewModel = viewModel
+        cardDeckView.cardDeckViewModel = viewModel.cardDeckViewModel
+    }
+    
+    func resetGame() {
+        self.cardGameViewModel.resetGame()
+    }
 }
 
 extension CardGameView {

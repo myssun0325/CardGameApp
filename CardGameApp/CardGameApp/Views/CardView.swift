@@ -9,18 +9,12 @@
 import UIKit
 
 class CardView: UIImageView {
-    private var backImage: UIImage? = UIImage(named: ImageName.cardBack)
-    private var frontImage: UIImage?
+    var cardViewModel: CardViewModel!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        setupDefault()
-    }
-    
-    override init(image: UIImage?) {
-        super.init(image: image)
-        self.frame.size = CGSize(width: CardSize.width, height: CardSize.height)
-        setupDefault()
+    convenience init(viewModel: CardViewModel, frame: CGRect) {
+        self.init(frame: frame)
+        self.cardViewModel = viewModel
+        self.image = UIImage(named: viewModel.imageName)
     }
     
     override init(frame: CGRect) {
@@ -34,12 +28,8 @@ class CardView: UIImageView {
     }
     
     private func setupDefault() {
-        setEmptyLayer()
-        self.frontImage = image
-        self.image = backImage
-    }
-    
-    func flip() {
-        self.image = frontImage
+        self.isUserInteractionEnabled = true
+        layer.cornerRadius = 5
+        layer.masksToBounds = true
     }
 }

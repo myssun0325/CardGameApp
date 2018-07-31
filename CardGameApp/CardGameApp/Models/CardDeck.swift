@@ -8,22 +8,10 @@
 
 import Foundation
 
-class CardDeck {
+class CardDeck: IteratorProtocol, Sequence {
     private var cards: [Card] = []
     
-    init(_ cards: [Card]) {
-        self.cards = cards
-    }
-    
-    init() {
-        reset()
-    }
-    
-    var topCard: Card? {
-        return cards.last
-    }
-    
-    func reset() {
+    func fillDefaultShuffledCards() {
         var cards: [Card] = [Card]()
         for suit in Card.Suit.allCases {
             for number in Card.Number.allCases {
@@ -48,21 +36,23 @@ class CardDeck {
         return topCard
     }
     
-    func push(cards: [Card]) {
-        self.cards.append(contentsOf: cards)
+    func push(card: Card) {
+        self.cards.append(card)
     }
     
-    func popCards(count: Int) -> [Card] {
-        var cards: [Card] = []
-        for _ in 0..<count {
-            if let card = popTopCard() {
-                cards.append(card)
-            }
+    func allCards() -> [Card] {
+        return self.cards
+    }
+    
+    // Iterator, Sequence
+    private var index: Int = 0
+    func next() -> Card? {
+        if index < self.cards.endIndex {
+            defer { index = self.cards.index(after: index) }
+            return self.cards[index]
+        } else {
+            self.index = 0
+            return nil
         }
-        return cards
-    }
-    
-    func topCardImageName() -> String {
-        return self.cards.count > 0 ? ImageName.cardBack : ImageName.deckRefresh
     }
 }

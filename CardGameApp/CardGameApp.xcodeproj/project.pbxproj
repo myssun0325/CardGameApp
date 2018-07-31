@@ -13,13 +13,22 @@
 		7333ECBF20FCEDBF006EFEF4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7333ECBE20FCEDBF006EFEF4 /* Assets.xcassets */; };
 		7333ECC220FCEDBF006EFEF4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7333ECC020FCEDBF006EFEF4 /* LaunchScreen.storyboard */; };
 		733AB9222104C9F10084789C /* CardGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733AB9212104C9F10084789C /* CardGame.swift */; };
-		733AB9242105B06A0084789C /* CardStackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733AB9232105B06A0084789C /* CardStackManager.swift */; };
+		733AB9242105B06A0084789C /* CardStackContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733AB9232105B06A0084789C /* CardStackContainer.swift */; };
 		733AB9262105C2AF0084789C /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733AB9252105C2AF0084789C /* CardView.swift */; };
+		73418E22210981EF008EC6C9 /* CardDeckViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73418E21210981EF008EC6C9 /* CardDeckViewModel.swift */; };
 		734F90EB2100EAB600EA9DDF /* CardStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734F90EA2100EAB600EA9DDF /* CardStack.swift */; };
 		737F20A520FF9518009E6813 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737F20A420FF9518009E6813 /* Card.swift */; };
 		737F20A720FF9CD0009E6813 /* CardDeck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737F20A620FF9CD0009E6813 /* CardDeck.swift */; };
 		737F20AA21002AA5009E6813 /* CardDeckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737F20A921002AA5009E6813 /* CardDeckView.swift */; };
-		737F20B021007E33009E6813 /* CardContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737F20AF21007E33009E6813 /* CardContainerView.swift */; };
+		73A8EF34210C8B9200D3AD48 /* WastePileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A8EF33210C8B9200D3AD48 /* WastePileView.swift */; };
+		73E40ABD210F2A51004754E3 /* WastePile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E40ABC210F2A51004754E3 /* WastePile.swift */; };
+		73EAE7D32109D330009EBDB6 /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EAE7D22109D330009EBDB6 /* CardViewModel.swift */; };
+		73EAE7D5210ADE0A009EBDB6 /* CardGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EAE7D4210ADE0A009EBDB6 /* CardGameView.swift */; };
+		73EAE7D7210ADF4C009EBDB6 /* CardGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EAE7D6210ADF4C009EBDB6 /* CardGameViewModel.swift */; };
+		73EAE7D9210C36BE009EBDB6 /* FoundationContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EAE7D8210C36BE009EBDB6 /* FoundationContainerView.swift */; };
+		73EAE7DB210C38D3009EBDB6 /* EmptyLayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EAE7DA210C38D3009EBDB6 /* EmptyLayerView.swift */; };
+		73EAE7E0210C71E9009EBDB6 /* CardStackContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EAE7DF210C71E9009EBDB6 /* CardStackContainerView.swift */; };
+		73EAE801210C8A38009EBDB6 /* EmptyViewSettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EAE800210C8A38009EBDB6 /* EmptyViewSettable.swift */; };
 		C8AEF50C4754CC6BD359A7AA /* Pods_CardGameApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E60317B0C17930097C3565C /* Pods_CardGameApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -33,13 +42,22 @@
 		7333ECC120FCEDBF006EFEF4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7333ECC320FCEDC0006EFEF4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		733AB9212104C9F10084789C /* CardGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardGame.swift; sourceTree = "<group>"; };
-		733AB9232105B06A0084789C /* CardStackManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStackManager.swift; sourceTree = "<group>"; };
+		733AB9232105B06A0084789C /* CardStackContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStackContainer.swift; sourceTree = "<group>"; };
 		733AB9252105C2AF0084789C /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		73418E21210981EF008EC6C9 /* CardDeckViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDeckViewModel.swift; sourceTree = "<group>"; };
 		734F90EA2100EAB600EA9DDF /* CardStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStack.swift; sourceTree = "<group>"; };
 		737F20A420FF9518009E6813 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		737F20A620FF9CD0009E6813 /* CardDeck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDeck.swift; sourceTree = "<group>"; };
 		737F20A921002AA5009E6813 /* CardDeckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDeckView.swift; sourceTree = "<group>"; };
-		737F20AF21007E33009E6813 /* CardContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardContainerView.swift; sourceTree = "<group>"; };
+		73A8EF33210C8B9200D3AD48 /* WastePileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WastePileView.swift; sourceTree = "<group>"; };
+		73E40ABC210F2A51004754E3 /* WastePile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WastePile.swift; sourceTree = "<group>"; };
+		73EAE7D22109D330009EBDB6 /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
+		73EAE7D4210ADE0A009EBDB6 /* CardGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardGameView.swift; sourceTree = "<group>"; };
+		73EAE7D6210ADF4C009EBDB6 /* CardGameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardGameViewModel.swift; sourceTree = "<group>"; };
+		73EAE7D8210C36BE009EBDB6 /* FoundationContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoundationContainerView.swift; sourceTree = "<group>"; };
+		73EAE7DA210C38D3009EBDB6 /* EmptyLayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyLayerView.swift; sourceTree = "<group>"; };
+		73EAE7DF210C71E9009EBDB6 /* CardStackContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStackContainerView.swift; sourceTree = "<group>"; };
+		73EAE800210C8A38009EBDB6 /* EmptyViewSettable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyViewSettable.swift; sourceTree = "<group>"; };
 		9A8FCA32C54903284354A543 /* Pods-CardGameApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardGameApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-CardGameApp/Pods-CardGameApp.release.xcconfig"; sourceTree = "<group>"; };
 		9F38E92704025A5078BEAA92 /* Pods-CardGameApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardGameApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CardGameApp/Pods-CardGameApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -85,6 +103,8 @@
 		7333ECB620FCEDBE006EFEF4 /* CardGameApp */ = {
 			isa = PBXGroup;
 			children = (
+				73EAE7FF210C8A1C009EBDB6 /* Protocols */,
+				73418E20210981D1008EC6C9 /* ViewModels */,
 				737F20A8210029FA009E6813 /* Views */,
 				737F20A320FF950B009E6813 /* Models */,
 				7333ECB720FCEDBE006EFEF4 /* AppDelegate.swift */,
@@ -97,14 +117,25 @@
 			path = CardGameApp;
 			sourceTree = "<group>";
 		};
+		73418E20210981D1008EC6C9 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				73418E21210981EF008EC6C9 /* CardDeckViewModel.swift */,
+				73EAE7D22109D330009EBDB6 /* CardViewModel.swift */,
+				73EAE7D6210ADF4C009EBDB6 /* CardGameViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		737F20A320FF950B009E6813 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				737F20A420FF9518009E6813 /* Card.swift */,
 				737F20A620FF9CD0009E6813 /* CardDeck.swift */,
 				734F90EA2100EAB600EA9DDF /* CardStack.swift */,
-				733AB9232105B06A0084789C /* CardStackManager.swift */,
+				733AB9232105B06A0084789C /* CardStackContainer.swift */,
 				733AB9212104C9F10084789C /* CardGame.swift */,
+				73E40ABC210F2A51004754E3 /* WastePile.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -112,11 +143,23 @@
 		737F20A8210029FA009E6813 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				737F20AF21007E33009E6813 /* CardContainerView.swift */,
-				737F20A921002AA5009E6813 /* CardDeckView.swift */,
 				733AB9252105C2AF0084789C /* CardView.swift */,
+				73EAE7D4210ADE0A009EBDB6 /* CardGameView.swift */,
+				73EAE7DA210C38D3009EBDB6 /* EmptyLayerView.swift */,
+				73EAE7D8210C36BE009EBDB6 /* FoundationContainerView.swift */,
+				73EAE7DF210C71E9009EBDB6 /* CardStackContainerView.swift */,
+				73A8EF33210C8B9200D3AD48 /* WastePileView.swift */,
+				737F20A921002AA5009E6813 /* CardDeckView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		73EAE7FF210C8A1C009EBDB6 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				73EAE800210C8A38009EBDB6 /* EmptyViewSettable.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		74EAB7A1163E4AD7A3E775CA /* Pods */ = {
@@ -208,7 +251,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"";
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
 		};
 		7D9D87891528C3B298A770A5 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -236,14 +279,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				7333ECBA20FCEDBE006EFEF4 /* ViewController.swift in Sources */,
-				737F20B021007E33009E6813 /* CardContainerView.swift in Sources */,
 				737F20AA21002AA5009E6813 /* CardDeckView.swift in Sources */,
-				733AB9242105B06A0084789C /* CardStackManager.swift in Sources */,
+				733AB9242105B06A0084789C /* CardStackContainer.swift in Sources */,
 				733AB9262105C2AF0084789C /* CardView.swift in Sources */,
 				737F20A520FF9518009E6813 /* Card.swift in Sources */,
+				73EAE7DB210C38D3009EBDB6 /* EmptyLayerView.swift in Sources */,
+				73418E22210981EF008EC6C9 /* CardDeckViewModel.swift in Sources */,
 				737F20A720FF9CD0009E6813 /* CardDeck.swift in Sources */,
+				73A8EF34210C8B9200D3AD48 /* WastePileView.swift in Sources */,
+				73EAE7D9210C36BE009EBDB6 /* FoundationContainerView.swift in Sources */,
+				73E40ABD210F2A51004754E3 /* WastePile.swift in Sources */,
+				73EAE7D32109D330009EBDB6 /* CardViewModel.swift in Sources */,
+				73EAE7E0210C71E9009EBDB6 /* CardStackContainerView.swift in Sources */,
 				733AB9222104C9F10084789C /* CardGame.swift in Sources */,
+				73EAE7D7210ADF4C009EBDB6 /* CardGameViewModel.swift in Sources */,
 				7333ECB820FCEDBE006EFEF4 /* AppDelegate.swift in Sources */,
+				73EAE7D5210ADE0A009EBDB6 /* CardGameView.swift in Sources */,
+				73EAE801210C8A38009EBDB6 /* EmptyViewSettable.swift in Sources */,
 				734F90EB2100EAB600EA9DDF /* CardStack.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -392,7 +444,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B3PWYBKFUK;
 				INFOPLIST_FILE = CardGameApp/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.CardGameApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -408,7 +463,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B3PWYBKFUK;
 				INFOPLIST_FILE = CardGameApp/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.CardGameApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
