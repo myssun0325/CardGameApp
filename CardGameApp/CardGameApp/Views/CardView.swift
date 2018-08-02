@@ -14,7 +14,9 @@ class CardView: UIImageView {
     convenience init(viewModel: CardViewModel, frame: CGRect) {
         self.init(frame: frame)
         self.cardViewModel = viewModel
-        self.image = UIImage(named: viewModel.imageName)
+        image = UIImage(named: ImageName.cardBack)
+        highlightedImage = UIImage(named: viewModel.imageName)
+        isHighlighted = viewModel.isOpen
     }
     
     override init(frame: CGRect) {
@@ -31,9 +33,5 @@ class CardView: UIImageView {
         self.isUserInteractionEnabled = true
         layer.cornerRadius = 5
         layer.masksToBounds = true
-    }
-    
-    func updateImage() {
-        self.image = UIImage(named: cardViewModel.imageName)
     }
 }

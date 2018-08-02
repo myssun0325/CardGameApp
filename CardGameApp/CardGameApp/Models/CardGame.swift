@@ -20,11 +20,11 @@ class CardGame {
         wastePile.emptyAllCards()
         cardStackContainer.emptyAllCardStacks()
         
-        for cardStackIndex in 1...CardGame.numberOfCardStacks {
+        (1...CardGame.numberOfCardStacks).forEach {
             var removed: [Card] = [Card]()
-            for _ in 0..<cardStackIndex {
-                if let popped = cardDeck.popTopCard() {
-                    removed.append(popped)
+            (0..<$0).forEach { _ in
+                if let opened = cardDeck.openTopCard() {
+                    removed.append(opened)
                 }
             }
             cardStackContainer.addCardStack(removed)

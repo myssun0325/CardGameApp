@@ -10,13 +10,15 @@ import Foundation
 
 class CardViewModel {
     // Model
-    let card: Card
+    private let card: Card
+    private(set) var imageName: String
     
-    var imageName: String {
-        return card.cardImageName
+    var isOpen: Bool {
+        return card.isOpen
     }
     
     init(card: Card) {
         self.card = card
+        self.imageName = "\(card)"
     }
 }

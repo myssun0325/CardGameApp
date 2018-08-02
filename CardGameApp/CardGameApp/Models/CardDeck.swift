@@ -26,6 +26,10 @@ class CardDeck: IteratorProtocol, Sequence {
         return self.cards.popLast()
     }
     
+    func push(card: Card) {
+        self.cards.append(card)
+    }
+    
     // Fisher–Yates shuffle
     private func shuffleCards() {
         var shuffled = [Card]()
@@ -33,19 +37,6 @@ class CardDeck: IteratorProtocol, Sequence {
             shuffled.append(self.cards.remove(at: Int(arc4random_uniform(count))))
         }
         self.cards = shuffled
-    }
-    
-    func popTopCard() -> Card? {
-        guard let topCard = self.cards.popLast() else { return nil }
-        return topCard
-    }
-    
-    func push(card: Card) {
-        self.cards.append(card)
-    }
-    
-    func allCards() -> [Card] {
-        return self.cards
     }
     
     // Iterator, Sequence

@@ -41,15 +41,15 @@ class CardGameView: UIView {
     }
     
     @objc func cardDeckDidOpend(_ notification: Notification) {
-        guard let poped: CardView = self.cardDeckView.popTopCardView() else { return }
-        wastePileView.push(cardView: poped)
-        poped.updateImage()
+        guard let popped: CardView = self.cardDeckView.popTopCardView() else { return }
+        popped.isHighlighted = popped.cardViewModel.isOpen
+        wastePileView.push(cardView: popped)
     }
     
     @objc func wastePileRecycled(_ notification: Notification) {
         while let popped: CardView = self.wastePileView.popTopCardView() {
+            popped.isHighlighted = popped.cardViewModel.isOpen
             cardDeckView.push(cardView: popped)
-            popped.updateImage()
         }
     }
     
