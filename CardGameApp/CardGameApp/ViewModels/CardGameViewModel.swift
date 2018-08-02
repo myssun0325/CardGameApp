@@ -20,12 +20,12 @@ class CardGameViewModel {
     }
     
     private func setupNotificationObservers() {
-        NotificationCenter.default.addObserver(self, selector: #selector(self.gameDidReset(_:)), name: .gameDidReset, object: cardGame)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.cardGameDidReset(_:)), name: .cardGameDidReset, object: cardGame)
     }
     
-    @objc func gameDidReset(_ notification: Notification) {
+    @objc func cardGameDidReset(_ notification: Notification) {
         cardDeckViewModel.initCardViewModels()
-        NotificationCenter.default.post(name: .gameDidReset, object: self)
+        NotificationCenter.default.post(name: .cardGameVMDidReset, object: self)
     }
     
     func resetGame() {

@@ -19,6 +19,13 @@ class CardGame {
         cardDeck.fillDefaultShuffledCards()
         wastePile.emptyAllCards()
         cardStackContainer.emptyAllCardStacks()
-        NotificationCenter.default.post(name: .gameDidReset, object: self)
+        NotificationCenter.default.post(name: .cardGameDidReset, object: self)
     }
+}
+
+enum Position {
+    case cardDeck
+    case wastePile
+    case cardStack(Int)
+    case foundation(Int)
 }

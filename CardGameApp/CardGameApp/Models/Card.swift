@@ -33,7 +33,7 @@ class Card: CustomStringConvertible {
 }
 
 extension Card {
-    enum Suit: CustomStringConvertible, CaseIterable {
+    enum Suit: CustomStringConvertible {
         case clubs, diamonds, hearts, spades
         var description: String {
             switch self {
@@ -43,9 +43,10 @@ extension Card {
             case .spades:   return "s"
             }
         }
+        static var allCases: [Suit] = [.clubs, .diamonds, .hearts, .spades]
     }
     
-    enum Number: Int, CustomStringConvertible, CaseIterable {
+    enum Number: Int, CustomStringConvertible {
         case two = 2, three, four, five, six, seven, eight, nine, ten, jack, queen, king, ace
         var description: String {
             switch self {
@@ -57,6 +58,7 @@ extension Card {
                 return String(self.rawValue)
             }
         }
+        static var allCases: [Number] = [.two, .three, .four, .five, .six, .seven, .eight, .nine, .ten, .jack, .queen, .king, .ace]
     }
     
 }

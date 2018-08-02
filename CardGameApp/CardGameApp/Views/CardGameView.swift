@@ -26,20 +26,20 @@ class CardGameView: UIView {
     }
     
     func setupNotificationObservers() {
-        NotificationCenter.default.addObserver(self, selector: #selector(self.gameDidReset(_:)), name: .gameDidReset, object: cardGameViewModel)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.cardGameVMDidReset(_:)), name: .cardGameVMDidReset, object: cardGameViewModel)
     }
     
-    @objc func gameDidReset(_ notification: Notification) {
+    @objc func cardGameVMDidReset(_ notification: Notification) {
         self.cardDeckView.makeCardViews()
     }
     
     convenience init(viewModel: CardGameViewModel, frame: CGRect) {
         self.init(frame: frame)
-        setupNotificationObservers()
         frameInformation = FrameInformation(frame: frame)
         setupConatinerViews()
         cardGameViewModel = viewModel
         cardDeckView.cardDeckViewModel = viewModel.cardDeckViewModel
+        setupNotificationObservers()
     }
     
     func resetGame() {

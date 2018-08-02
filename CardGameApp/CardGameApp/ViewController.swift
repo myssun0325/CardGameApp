@@ -51,7 +51,3 @@ extension ViewController {
     // Set Status Bar Color
     override var preferredStatusBarStyle: UIStatusBarStyle { return .lightContent }
 }
-
-extension Notification.Name {
-    static let gameDidReset = Notification.Name("gameDidReset")
-}

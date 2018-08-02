@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol EmptyViewSettable {
+protocol EmptyViewSettable: class {
     func setEmptyLayerViews(_ numberOfView: Int)
 }
 
