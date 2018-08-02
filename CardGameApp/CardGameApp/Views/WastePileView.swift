@@ -9,6 +9,13 @@
 import UIKit
 
 class WastePileView: UIView, EmptyViewSettable {
+    var wastePileViewModel: WastePileViewModel!
+    private var cardViews: [CardView] = []
+    
+    convenience init(viewModel: WastePileViewModel, frame: CGRect) {
+        self.init(frame: frame)
+        self.wastePileViewModel = viewModel
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -18,5 +25,14 @@ class WastePileView: UIView, EmptyViewSettable {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setEmptyLayerViews(1)
+    }
+    
+    func push(cardView: CardView) {
+        self.cardViews.append(cardView)
+        self.addSubview(cardView)
+    }
+    
+    func popTopCardView() -> CardView? {
+        return cardViews.popLast()
     }
 }

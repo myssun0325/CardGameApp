@@ -27,10 +27,29 @@ class CardGameView: UIView {
     
     func setupNotificationObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(self.cardGameVMDidReset(_:)), name: .cardGameVMDidReset, object: cardGameViewModel)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.cardDeckDidOpend(_:)), name: .cardDeckOpened, object: cardGameViewModel)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.wastePileRecycled(_:)), name: .wastePileRecycled, object: cardGameViewModel)
     }
     
     @objc func cardGameVMDidReset(_ notification: Notification) {
+        self.cardDeckView.forEach { $0.removeFromSuperview() }
+        self.cardStackContainerView.forEach { $0.removeFromSuperview() }
         self.cardDeckView.makeCardViews()
+        self.cardStackContainerView.makeCardStackViews()
+        cardStackContainerView.forEach { $0.makeCardViews() }
+    }
+    
+    @objc func cardDeckDidOpend(_ notification: Notification) {
+        guard let poped: CardView = self.cardDeckView.popTopCardView() else { return }
+        poped.updateImage()
+        wastePileView.push(cardView: poped)
+    }
+    
+    @objc func wastePileRecycled(_ notification: Notification) {
+        while let popped: CardView = self.wastePileView.popTopCardView() {
+            popped.updateImage()
+            cardDeckView.push(cardView: popped)
+        }
     }
     
     convenience init(viewModel: CardGameViewModel, frame: CGRect) {
@@ -39,11 +58,20 @@ class CardGameView: UIView {
         setupConatinerViews()
         cardGameViewModel = viewModel
         cardDeckView.cardDeckViewModel = viewModel.cardDeckViewModel
+        cardStackContainerView.cardStackContainerViewModel = viewModel.cardStackContainerViewModel
+        wastePileView.wastePileViewModel = viewModel.wastePileViewModel
         setupNotificationObservers()
     }
     
     func resetGame() {
         self.cardGameViewModel.resetGame()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touchPoint = touches.first?.location(in: self) else { return }
+        if self.cardDeckView.frame.contains(touchPoint) {
+            cardGameViewModel.openCardDeck()
+        }
     }
 }
 

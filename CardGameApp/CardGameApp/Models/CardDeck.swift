@@ -22,6 +22,10 @@ class CardDeck: IteratorProtocol, Sequence {
         self.shuffleCards()
     }
     
+    func openTopCard() -> Card? {
+        return self.cards.popLast()
+    }
+    
     // Fisher–Yates shuffle
     private func shuffleCards() {
         var shuffled = [Card]()

@@ -32,4 +32,8 @@ class CardView: UIImageView {
         layer.cornerRadius = 5
         layer.masksToBounds = true
     }
+    
+    func updateImage() {
+        self.image = UIImage(named: cardViewModel.imageName)
+    }
 }

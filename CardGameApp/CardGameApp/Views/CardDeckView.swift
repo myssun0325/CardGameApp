@@ -8,9 +8,9 @@
 
 import UIKit
 
-class CardDeckView: UIImageView {
+class CardDeckView: UIImageView, IteratorProtocol, Sequence {
     var cardDeckViewModel: CardDeckViewModel!
-    var cardViews: [CardView] = [CardView]()
+    private var cardViews: [CardView] = []
     
     private func defaultSetup() {
         image = UIImage(named: ImageName.deckRefresh)
@@ -33,10 +33,32 @@ class CardDeckView: UIImageView {
     }
     
     func makeCardViews() {
+        self.cardViews.removeAll()
         for cardViewModel in cardDeckViewModel {
             let cardView = CardView(viewModel: cardViewModel, frame: self.bounds)
             self.cardViews.append(cardView)
             self.addSubview(cardView)
+        }
+    }
+    
+    func popTopCardView() -> CardView? {
+        return cardViews.popLast()
+    }
+    
+    func push(cardView: CardView) {
+        self.cardViews.append(cardView)
+        self.addSubview(cardView)
+    }
+    
+    // Iterator, Sequence
+    private var index: Int = 0
+    func next() -> CardView? {
+        if index < self.cardViews.endIndex {
+            defer { index = self.cardViews.index(after: index) }
+            return self.cardViews[index]
+        } else {
+            self.index = 0
+            return nil
         }
     }
 }

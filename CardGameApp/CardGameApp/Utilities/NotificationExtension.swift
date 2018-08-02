@@ -11,4 +11,7 @@ import Foundation
 extension Notification.Name {
     static let cardGameDidReset = Notification.Name("cardGameDidReset")
     static let cardGameVMDidReset = Notification.Name("cardGameVMDidReset")
+    static let cardDeckOpened = Notification.Name("cardDeckOpened")
+    static let wastePileRecycled = Notification.Name("wastePileRecycled")
+//    static let cardDeckOpend = Notification.Name("cardDeckOpend")
 }

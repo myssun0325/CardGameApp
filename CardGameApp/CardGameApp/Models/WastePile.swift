@@ -14,4 +14,15 @@ class WastePile {
     func emptyAllCards() {
         cards.removeAll()
     }
+    
+    func push(card: Card) {
+        self.cards.append(card)
+    }
+    
+    func recycle() -> [Card] {
+        let reversed: [Card] = cards.reversed()
+        reversed.forEach { $0.flip() }
+        cards.removeAll()
+        return reversed
+    }
 }

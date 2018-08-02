@@ -8,7 +8,7 @@
 
 import Foundation
 
-class CardStackContainer {
+class CardStackContainer: IteratorProtocol, Sequence {
     private var cardStacks: [CardStack] = []
     
     func emptyAllCardStacks() {
@@ -21,5 +21,21 @@ class CardStackContainer {
     
     func cardStack(at index: Int) -> CardStack {
         return cardStacks[index]
+    }
+    
+    func push(card: Card, index: Int) {
+        self.cardStacks[index].add(card: card)
+    }
+    
+    // Iterator, Sequence
+    private var index: Int = 0
+    func next() -> CardStack? {
+        if index < self.cardStacks.endIndex {
+            defer { index = self.cardStacks.index(after: index) }
+            return self.cardStacks[index]
+        } else {
+            self.index = 0
+            return nil
+        }
     }
 }
