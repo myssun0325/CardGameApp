@@ -33,7 +33,6 @@ class CardDeckView: UIImageView, IteratorProtocol, Sequence {
     }
     
     func makeCardViews() {
-        self.cardViews.removeAll()
         for cardViewModel in cardDeckViewModel {
             let cardView = CardView(viewModel: cardViewModel, frame: self.bounds)
             self.cardViews.append(cardView)
@@ -48,6 +47,11 @@ class CardDeckView: UIImageView, IteratorProtocol, Sequence {
     func push(cardView: CardView) {
         self.cardViews.append(cardView)
         self.addSubview(cardView)
+    }
+    
+    func resetCardViews() {
+        self.cardViews.forEach { $0.removeFromSuperview() }
+        self.cardViews.removeAll()
     }
     
     // Iterator, Sequence

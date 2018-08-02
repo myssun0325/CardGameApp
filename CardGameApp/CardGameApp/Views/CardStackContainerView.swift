@@ -29,12 +29,20 @@ class CardStackContainerView: UIView, EmptyViewSettable, IteratorProtocol, Seque
     }
     
     func makeCardStackViews() {
-        self.cardStackViews.removeAll()
         for (index, cardStackViewModel) in cardStackContainerViewModel.enumerated() {
             let cardStackView = CardStackView(viewModel: cardStackViewModel, frame: CGRect(origin: CGPoint(x: CGFloat(index) * (CardSize.originXSpacing), y: 0), size: CGSize(width: CardSize.width, height: CardSize.height)))
             self.cardStackViews.append(cardStackView)
             self.addSubview(cardStackView)
         }
+    }
+    
+    func makeCardViews() {
+        cardStackViews.forEach { $0.makeCardViews() }
+    }
+    
+    func resetCardStackViews() {
+        self.cardStackViews.forEach { $0.removeFromSuperview() }
+        self.cardStackViews.removeAll()
     }
     
     // Iterator, Sequence

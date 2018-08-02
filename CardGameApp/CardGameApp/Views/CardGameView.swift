@@ -32,12 +32,12 @@ class CardGameView: UIView {
     }
     
     @objc func cardGameVMDidReset(_ notification: Notification) {
-        self.cardDeckView.forEach { $0.removeFromSuperview() }
-        self.cardStackContainerView.forEach { $0.removeFromSuperview() }
-        self.wastePileView.forEach { $0.removeFromSuperview() }
-        self.cardDeckView.makeCardViews()
-        self.cardStackContainerView.makeCardStackViews()
-        cardStackContainerView.forEach { $0.makeCardViews() }
+        cardDeckView.resetCardViews()
+        wastePileView.resetCardViews()
+        cardStackContainerView.resetCardStackViews()
+        cardDeckView.makeCardViews()
+        cardStackContainerView.makeCardStackViews()
+        cardStackContainerView.makeCardViews()
     }
     
     @objc func cardDeckDidOpend(_ notification: Notification) {

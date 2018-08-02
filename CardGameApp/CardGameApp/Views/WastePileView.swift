@@ -36,6 +36,11 @@ class WastePileView: UIView, EmptyViewSettable, IteratorProtocol, Sequence {
         return cardViews.popLast()
     }
     
+    func resetCardViews() {
+        self.cardViews.forEach { $0.removeFromSuperview() }
+        self.cardViews.removeAll()
+    }
+    
     // Iterator, Sequence
     private var index: Int = 0
     func next() -> CardView? {
