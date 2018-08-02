@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WastePileView: UIView, EmptyViewSettable {
+class WastePileView: UIView, EmptyViewSettable, IteratorProtocol, Sequence {
     var wastePileViewModel: WastePileViewModel!
     private var cardViews: [CardView] = []
     
@@ -34,5 +34,17 @@ class WastePileView: UIView, EmptyViewSettable {
     
     func popTopCardView() -> CardView? {
         return cardViews.popLast()
+    }
+    
+    // Iterator, Sequence
+    private var index: Int = 0
+    func next() -> CardView? {
+        if index < self.cardViews.endIndex {
+            defer { index = self.cardViews.index(after: index) }
+            return self.cardViews[index]
+        } else {
+            self.index = 0
+            return nil
+        }
     }
 }

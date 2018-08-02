@@ -34,6 +34,7 @@ class CardGameView: UIView {
     @objc func cardGameVMDidReset(_ notification: Notification) {
         self.cardDeckView.forEach { $0.removeFromSuperview() }
         self.cardStackContainerView.forEach { $0.removeFromSuperview() }
+        self.wastePileView.forEach { $0.removeFromSuperview() }
         self.cardDeckView.makeCardViews()
         self.cardStackContainerView.makeCardStackViews()
         cardStackContainerView.forEach { $0.makeCardViews() }
@@ -41,14 +42,14 @@ class CardGameView: UIView {
     
     @objc func cardDeckDidOpend(_ notification: Notification) {
         guard let poped: CardView = self.cardDeckView.popTopCardView() else { return }
-        poped.updateImage()
         wastePileView.push(cardView: poped)
+        poped.updateImage()
     }
     
     @objc func wastePileRecycled(_ notification: Notification) {
         while let popped: CardView = self.wastePileView.popTopCardView() {
-            popped.updateImage()
             cardDeckView.push(cardView: popped)
+            popped.updateImage()
         }
     }
     
