@@ -10,7 +10,7 @@ import UIKit
 
 class CardGameView: UIView {
     // ViewModel
-    private var cardGameViewModel: CardGameViewModel!
+    private var cardGameViewModel: CardGameViewModelProtocol!
     private var frameInformation: FrameInformation!
     
     lazy var foundationContainerView = FoundationContainerView(frame: frameInformation.foundationContainerViewFrame)
@@ -53,7 +53,7 @@ class CardGameView: UIView {
         }
     }
     
-    convenience init(viewModel: CardGameViewModel, frame: CGRect) {
+    convenience init(viewModel: CardGameViewModelProtocol, frame: CGRect) {
         self.init(frame: frame)
         frameInformation = FrameInformation(frame: frame)
         setupConatinerViews()

@@ -8,7 +8,15 @@
 
 import Foundation
 
-class CardGameViewModel {
+protocol CardGameViewModelProtocol {
+    func resetGame()
+    func openCardDeck()
+    var cardDeckViewModel: CardDeckViewModel! { get }
+    var cardStackContainerViewModel: CardStackContainerViewModel! { get }
+    var wastePileViewModel: WastePileViewModel! { get }
+}
+
+class CardGameViewModel: CardGameViewModelProtocol {
     // Model
     private var cardGame: CardGame
     private(set) var cardDeckViewModel: CardDeckViewModel!
@@ -45,9 +53,7 @@ class CardGameViewModel {
     
     @objc func wastePileRecycled(_ notification: Notification) {
         let cardViewModels = wastePileViewModel.removeAllCardViewModels()
-        cardViewModels.forEach {
-            cardDeckViewModel.push(cardViewModel: $0)
-        }
+        cardViewModels.forEach { cardDeckViewModel.push(cardViewModel: $0) }
         NotificationCenter.default.post(name: .wastePileRecycled, object: self)
     }
     

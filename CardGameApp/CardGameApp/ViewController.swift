@@ -23,7 +23,7 @@ struct ImageName {
 
 class ViewController: UIViewController {
     private var cardGameView: CardGameView!
-    private var cardGameViewModel: CardGameViewModel!
+    private var cardGameViewModel: CardGameViewModelProtocol!
     
     // MARK: Setup game background
     private func setupBackGroundPatternImage() {
