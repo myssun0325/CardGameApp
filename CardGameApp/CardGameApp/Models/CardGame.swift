@@ -37,10 +37,10 @@ class CardGame {
         if let removed: Card = cardDeck.openTopCard() {
             removed.flip()
             wastePile.push(card: removed)
-            NotificationCenter.default.post(name: .cardDeckOpened, object: self)
+            NotificationCenter.default.post(name: .cardDeckDidOpen, object: self)
         } else {
             wastePile.recycle().forEach { cardDeck.push(card: $0) }
-            NotificationCenter.default.post(name: .wastePileRecycled, object: self)
+            NotificationCenter.default.post(name: .wastePileDidRecycle, object: self)
         }
     }
 }

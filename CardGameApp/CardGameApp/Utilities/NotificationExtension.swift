@@ -9,8 +9,13 @@
 import Foundation
 
 extension Notification.Name {
+    // Model
     static let cardGameDidReset = Notification.Name("cardGameDidReset")
+    static let cardDeckDidOpen = Notification.Name("cardDeckDidOpen")
+    static let wastePileDidRecycle = Notification.Name("wastePileDidRecycle")
+    
+    // ViewModel
     static let cardGameVMDidReset = Notification.Name("cardGameVMDidReset")
-    static let cardDeckOpened = Notification.Name("cardDeckOpened")
-    static let wastePileRecycled = Notification.Name("wastePileRecycled")
+    static let cardDeckVMDidOpen = Notification.Name("cardDeckVMDidOpen")
+    static let wastePileVMDidRecycle = Notification.Name("wastePileVMDidRecycle")
 }

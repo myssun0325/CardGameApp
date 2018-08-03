@@ -30,8 +30,8 @@ class CardGameView: UIView {
     
     func setupNotificationObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(self.cardGameVMDidReset(_:)), name: .cardGameVMDidReset, object: cardGameViewModel)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.cardDeckDidOpend(_:)), name: .cardDeckOpened, object: cardGameViewModel)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.wastePileRecycled(_:)), name: .wastePileRecycled, object: cardGameViewModel)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.cardDeckVMDidOpen(_:)), name: .cardDeckVMDidOpen, object: cardGameViewModel)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.wastePileVMDidRecycle(_:)), name: .wastePileVMDidRecycle, object: cardGameViewModel)
     }
     
     @objc func cardGameVMDidReset(_ notification: Notification) {
@@ -43,13 +43,13 @@ class CardGameView: UIView {
         cardStackContainerView.makeCardViews()
     }
     
-    @objc func cardDeckDidOpend(_ notification: Notification) {
+    @objc func cardDeckVMDidOpen(_ notification: Notification) {
         guard let popped: CardView = self.cardDeckView.popTopCardView() else { return }
         popped.isHighlighted = popped.cardViewModel.isOpen
         wastePileView.push(cardView: popped)
     }
     
-    @objc func wastePileRecycled(_ notification: Notification) {
+    @objc func wastePileVMDidRecycle(_ notification: Notification) {
         while let popped: CardView = self.wastePileView.popTopCardView() {
             popped.isHighlighted = popped.cardViewModel.isOpen
             cardDeckView.push(cardView: popped)

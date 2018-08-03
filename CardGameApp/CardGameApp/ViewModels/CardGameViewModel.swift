@@ -33,8 +33,8 @@ class CardGameViewModel: CardGameViewModelProtocol {
     
     private func setupNotificationObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(self.cardGameDidReset(_:)), name: .cardGameDidReset, object: cardGame)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.cardDeckOpend(_:)), name: .cardDeckOpened, object: cardGame)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.wastePileRecycled(_:)), name: .wastePileRecycled, object: cardGame)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.cardDeckDidOpen(_:)), name: .cardDeckDidOpen, object: cardGame)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.wastePileDidRecycle(_:)), name: .wastePileDidRecycle, object: cardGame)
     }
     
     @objc func cardGameDidReset(_ notification: Notification) {
@@ -45,16 +45,16 @@ class CardGameViewModel: CardGameViewModelProtocol {
         NotificationCenter.default.post(name: .cardGameVMDidReset, object: self)
     }
     
-    @objc func cardDeckOpend(_ notification: Notification) {
+    @objc func cardDeckDidOpen(_ notification: Notification) {
         let topCardViewModel = cardDeckViewModel.removeTopCardViewModel()
         wastePileViewModel.push(cardViewModel: topCardViewModel)
-        NotificationCenter.default.post(name: .cardDeckOpened, object: self)
+        NotificationCenter.default.post(name: .cardDeckVMDidOpen, object: self)
     }
     
-    @objc func wastePileRecycled(_ notification: Notification) {
+    @objc func wastePileDidRecycle(_ notification: Notification) {
         let cardViewModels = wastePileViewModel.removeAllCardViewModels()
         cardViewModels.forEach { cardDeckViewModel.push(cardViewModel: $0) }
-        NotificationCenter.default.post(name: .wastePileRecycled, object: self)
+        NotificationCenter.default.post(name: .wastePileVMDidRecycle, object: self)
     }
     
     func resetGame() {
