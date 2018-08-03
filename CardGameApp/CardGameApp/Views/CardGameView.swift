@@ -11,12 +11,15 @@ import UIKit
 class CardGameView: UIView {
     // ViewModel
     private var cardGameViewModel: CardGameViewModelProtocol!
-    private var frameInformation: FrameInformation!
+    private let topSpacing: CGFloat = 20
+    private let cardStackContainerTopSpacing: CGFloat = 100
+    private let numberOfFoundation: CGFloat = 4
+    private let numberOfCardStacks: CGFloat = 7
     
-    lazy var foundationContainerView = FoundationContainerView(frame: frameInformation.foundationContainerViewFrame)
-    lazy var cardStackContainerView = CardStackContainerView(frame: frameInformation.cardStackContainerViewFrame)
-    lazy var wastePileView = WastePileView(frame: frameInformation.wastePileViewFrame)
-    lazy var cardDeckView = CardDeckView(frame: frameInformation.cardDeckViewFrame)
+    lazy var foundationContainerView = FoundationContainerView(frame: CGRect(origin: CGPoint(x: CardSize.spacing, y: topSpacing), size: CGSize(width: CardSize.originXSpacing * numberOfFoundation, height: CardSize.height)))
+    lazy var cardStackContainerView = CardStackContainerView(frame: CGRect(origin: CGPoint(x: CardSize.spacing, y: cardStackContainerTopSpacing), size: CGSize(width: CardSize.originXSpacing * numberOfCardStacks, height: CardSize.height)))
+    lazy var wastePileView = WastePileView(frame: CGRect(origin: CGPoint(x: CardSize.originXSpacing * 5 + CardSize.spacing, y: topSpacing), size: CGSize(width: CardSize.width, height: CardSize.height)))
+    lazy var cardDeckView = CardDeckView(frame: CGRect(origin: CGPoint(x: CardSize.originXSpacing * 6 + CardSize.spacing, y: topSpacing), size: CGSize(width: CardSize.width, height: CardSize.height)))
     
     func setupConatinerViews() {
         self.addSubview(foundationContainerView)
@@ -55,7 +58,6 @@ class CardGameView: UIView {
     
     convenience init(viewModel: CardGameViewModelProtocol, frame: CGRect) {
         self.init(frame: frame)
-        frameInformation = FrameInformation(frame: frame)
         setupConatinerViews()
         cardGameViewModel = viewModel
         cardDeckView.cardDeckViewModel = viewModel.cardDeckViewModel
@@ -72,31 +74,6 @@ class CardGameView: UIView {
         guard let touchPoint = touches.first?.location(in: self) else { return }
         if self.cardDeckView.frame.contains(touchPoint) {
             cardGameViewModel.openCardDeck()
-        }
-    }
-}
-
-extension CardGameView {
-    struct FrameInformation {
-        let foundationContainerViewFrame: CGRect
-        let cardStackContainerViewFrame: CGRect
-        let wastePileViewFrame: CGRect
-        let cardDeckViewFrame: CGRect
-        
-        init(frame: CGRect) {
-            let foundationConatinerViewOrigin = CGPoint(x: CardSize.spacing, y: 20)
-            let foundationConatinerViewSize = CGSize(width: CardSize.originXSpacing * 4, height: CardSize.height)
-            self.foundationContainerViewFrame = CGRect(origin: foundationConatinerViewOrigin, size: foundationConatinerViewSize)
-            
-            let cardStackContainerViewOrigin = CGPoint(x: CardSize.spacing, y: 100)
-            let cardStackContainerViewSize = CGSize(width: CardSize.originXSpacing * 7, height: CardSize.height)
-            self.cardStackContainerViewFrame = CGRect(origin: cardStackContainerViewOrigin, size: cardStackContainerViewSize)
-            
-            let wastePileViewOrigin = CGPoint(x: CardSize.originXSpacing * 5 + CardSize.spacing, y: 20)
-            self.wastePileViewFrame = CGRect(origin: wastePileViewOrigin, size: CGSize(width: CardSize.width, height: CardSize.height))
-            
-            let cardDeckViewOrigin = CGPoint(x: CardSize.originXSpacing * 6 + CardSize.spacing, y: 20)
-            self.cardDeckViewFrame = CGRect(origin: cardDeckViewOrigin, size: CGSize(width: CardSize.width, height: CardSize.height))
         }
     }
 }
