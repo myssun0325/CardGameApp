@@ -15,21 +15,22 @@ class CardGame {
     private(set) var wastePile: WastePile = WastePile()
     private(set) var cardStackContainer: CardStackContainer = CardStackContainer()
     
+    fileprivate func setupDefaultCardStacks() {
+        (1...CardGame.numberOfCardStacks).forEach {
+            cardStackContainer.addCardStack(openCardsOfCardDeck($0))
+        }
+        cardStackContainer.forEach { $0.topCard?.flip() }
+    }
+    
+    fileprivate func openCardsOfCardDeck(_ numberOfCards: Int) -> [Card] {
+        return (0..<numberOfCards).map({ _ in cardDeck.openTopCard() }).compactMap { $0 }
+    }
+    
     func resetGame() {
         cardDeck.fillDefaultShuffledCards()
         wastePile.emptyAllCards()
         cardStackContainer.emptyAllCardStacks()
-        
-        (1...CardGame.numberOfCardStacks).forEach {
-            var removed: [Card] = [Card]()
-            (0..<$0).forEach { _ in
-                if let opened = cardDeck.openTopCard() {
-                    removed.append(opened)
-                }
-            }
-            cardStackContainer.addCardStack(removed)
-        }
-        cardStackContainer.forEach { $0.topCard?.flip() }
+        setupDefaultCardStacks()
         NotificationCenter.default.post(name: .cardGameDidReset, object: self)
     }
     
