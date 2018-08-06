@@ -28,6 +28,16 @@ class Card: CustomStringConvertible {
     }
 }
 
+extension Card: Comparable {
+    static func < (lhs: Card, rhs: Card) -> Bool {
+        return lhs.number < rhs.number
+    }
+    
+    static func == (lhs: Card, rhs: Card) -> Bool {
+        return lhs.number == rhs.number && lhs.number == rhs.number
+    }
+}
+
 extension Card {
     enum Suit: CustomStringConvertible {
         case clubs, diamonds, hearts, spades
@@ -42,7 +52,11 @@ extension Card {
         static var allCases: [Suit] = [.clubs, .diamonds, .hearts, .spades]
     }
     
-    enum Number: Int, CustomStringConvertible {
+    enum Number: Int, CustomStringConvertible, Comparable {
+        static func < (lhs: Card.Number, rhs: Card.Number) -> Bool {
+            return lhs.rawValue < rhs.rawValue
+        }
+        
         case two = 2, three, four, five, six, seven, eight, nine, ten, jack, queen, king, ace
         var description: String {
             switch self {
@@ -56,5 +70,4 @@ extension Card {
         }
         static var allCases: [Number] = [.two, .three, .four, .five, .six, .seven, .eight, .nine, .ten, .jack, .queen, .king, .ace]
     }
-    
 }
