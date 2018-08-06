@@ -14,6 +14,7 @@ class CardGame {
     private(set) var cardDeck: CardDeck = CardDeck()
     private(set) var wastePile: WastePile = WastePile()
     private(set) var cardStackContainer: CardStackContainer = CardStackContainer()
+    private(set) var foundationContainer: FoundationContainer = FoundationContainer()
     
     fileprivate func setupDefaultCardStacks() {
         (1...CardGame.numberOfCardStacks).forEach {
@@ -30,6 +31,7 @@ class CardGame {
         cardDeck.fillDefaultShuffledCards()
         wastePile.emptyAllCards()
         cardStackContainer.emptyAllCardStacks()
+        foundationContainer.emptyAllFoundationDecks()
         setupDefaultCardStacks()
         NotificationCenter.default.post(name: .cardGameDidReset, object: self)
     }
