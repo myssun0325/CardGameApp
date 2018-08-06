@@ -40,12 +40,13 @@ class CardView: UIImageView {
     }
     
     private func setupGestureRecognizer() {
-        let recognizer = UITapGestureRecognizer(target: self, action: #selector(self.didCardDoubleTapped(_:)))
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(self.didDoubleTapped(_:)))
         recognizer.numberOfTapsRequired = 2
         self.addGestureRecognizer(recognizer)
     }
     
-    @objc func didCardDoubleTapped(_ gestureRecognizer: UIGestureRecognizer) {
-        guard self.cardViewModel.isOpen else { return }
+    @objc func didDoubleTapped(_ gestureRecognizer: UITapGestureRecognizer) {
+        guard self.isHighlighted else { return }
+        NotificationCenter.default.post(name: .cardViewDidDoubleTapped, object: self, userInfo: ["recognizer":gestureRecognizer])
     }
 }

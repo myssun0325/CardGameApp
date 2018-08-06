@@ -13,9 +13,13 @@ extension Notification.Name {
     static let cardGameDidReset = Notification.Name("cardGameDidReset")
     static let cardDeckDidOpen = Notification.Name("cardDeckDidOpen")
     static let wastePileDidRecycle = Notification.Name("wastePileDidRecycle")
+    static let cardDidPushedFoundationDeck = Notification.Name("cardDidPushedFoundationDeck")
     
     // ViewModel
     static let cardGameVMDidReset = Notification.Name("cardGameVMDidReset")
     static let cardDeckVMDidOpen = Notification.Name("cardDeckVMDidOpen")
     static let wastePileVMDidRecycle = Notification.Name("wastePileVMDidRecycle")
+
+    // View
+    static let cardViewDidDoubleTapped = Notification.Name("cardViewDidDoubleTapped")
 }

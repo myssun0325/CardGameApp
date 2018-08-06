@@ -14,7 +14,6 @@ class CardDeckView: UIImageView, IteratorProtocol, Sequence {
     
     private func defaultSetup() {
         image = UIImage(named: ImageName.deckRefresh)
-        self.isUserInteractionEnabled = true
     }
     
     convenience init(viewModel: CardDeckViewModel, frame: CGRect) {

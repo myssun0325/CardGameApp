@@ -32,6 +32,8 @@ class CardGameView: UIView {
         NotificationCenter.default.addObserver(self, selector: #selector(self.cardGameVMDidReset(_:)), name: .cardGameVMDidReset, object: cardGameViewModel)
         NotificationCenter.default.addObserver(self, selector: #selector(self.cardDeckVMDidOpen(_:)), name: .cardDeckVMDidOpen, object: cardGameViewModel)
         NotificationCenter.default.addObserver(self, selector: #selector(self.wastePileVMDidRecycle(_:)), name: .wastePileVMDidRecycle, object: cardGameViewModel)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.cardViewDidDoubleTapped(_:)), name: .cardViewDidDoubleTapped, object: nil)
     }
     
     private func setupCardStackConstraints() {
@@ -82,5 +84,26 @@ class CardGameView: UIView {
         if self.cardDeckView.frame.contains(touchPoint) {
             cardGameViewModel.openCardDeck()
         }
+    }
+    
+    @objc func cardViewDidDoubleTapped(_ notification: Notification) {
+        guard let recognizer = notification.userInfo?["recognizer"] as? UITapGestureRecognizer else { return }
+        let location = recognizer.location(in: self)
+        if wastePileView.frame.contains(location) {
+            cardGameViewModel.checkPositionToMove(from: .wastePile)
+        } else if cardStackContainerView.frame.contains(location) {
+            let index = indexOfCardStack(recognizer.location(in: cardStackContainerView))
+            cardGameViewModel.checkPositionToMove(from: .cardStack(index))
+        }
+    }
+    
+    private func indexOfCardStack(_ location: CGPoint) -> Int {
+        var index = 0
+        for (count, cardStackView) in cardStackContainerView.enumerated() {
+            if cardStackView.frame.contains(location) {
+                index = count
+            }
+        }
+        return index
     }
 }

@@ -11,6 +11,7 @@ import Foundation
 protocol CardGameViewModelProtocol {
     func resetGame()
     func openCardDeck()
+    func checkPositionToMove(from: Position)
     var cardDeckViewModel: CardDeckViewModel! { get }
     var cardStackContainerViewModel: CardStackContainerViewModel! { get }
     var wastePileViewModel: WastePileViewModel! { get }
@@ -63,5 +64,9 @@ class CardGameViewModel: CardGameViewModelProtocol {
     
     func openCardDeck() {
         cardGame.openCardDeck()
+    }
+    
+    func checkPositionToMove(from: Position) {
+        
     }
 }
