@@ -17,21 +17,27 @@ class CardGameView: UIView {
     private let numberOfCardStacks: CGFloat = 7
     
     lazy var foundationContainerView = FoundationContainerView(frame: CGRect(origin: CGPoint(x: CardSize.spacing, y: topSpacing), size: CGSize(width: CardSize.originXSpacing * numberOfFoundation, height: CardSize.height)))
-    lazy var cardStackContainerView = CardStackContainerView(frame: CGRect(origin: CGPoint(x: CardSize.spacing, y: cardStackContainerTopSpacing), size: CGSize(width: CardSize.originXSpacing * numberOfCardStacks, height: CardSize.height)))
+    lazy var cardStackContainerView = CardStackContainerView(frame: .zero)
     lazy var wastePileView = WastePileView(frame: CGRect(origin: CGPoint(x: CardSize.originXSpacing * 5 + CardSize.spacing, y: topSpacing), size: CGSize(width: CardSize.width, height: CardSize.height)))
     lazy var cardDeckView = CardDeckView(frame: CGRect(origin: CGPoint(x: CardSize.originXSpacing * 6 + CardSize.spacing, y: topSpacing), size: CGSize(width: CardSize.width, height: CardSize.height)))
     
-    func setupConatinerViews() {
+    private func setupConatinerViews() {
         self.addSubview(foundationContainerView)
         self.addSubview(cardStackContainerView)
         self.addSubview(wastePileView)
         self.addSubview(cardDeckView)
     }
     
-    func setupNotificationObservers() {
+    private func setupNotificationObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(self.cardGameVMDidReset(_:)), name: .cardGameVMDidReset, object: cardGameViewModel)
         NotificationCenter.default.addObserver(self, selector: #selector(self.cardDeckVMDidOpen(_:)), name: .cardDeckVMDidOpen, object: cardGameViewModel)
         NotificationCenter.default.addObserver(self, selector: #selector(self.wastePileVMDidRecycle(_:)), name: .wastePileVMDidRecycle, object: cardGameViewModel)
+    }
+    
+    private func setupCardStackConstraints() {
+        cardStackContainerView.translatesAutoresizingMaskIntoConstraints = false
+        cardStackContainerView.topAnchor.constraint(equalTo: foundationContainerView.bottomAnchor, constant: topSpacing).isActive = true
+        cardStackContainerView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: CardSize.spacing).isActive = true
     }
     
     @objc func cardGameVMDidReset(_ notification: Notification) {
@@ -59,6 +65,7 @@ class CardGameView: UIView {
     convenience init(viewModel: CardGameViewModelProtocol, frame: CGRect) {
         self.init(frame: frame)
         setupConatinerViews()
+        setupCardStackConstraints()
         cardGameViewModel = viewModel
         cardDeckView.cardDeckViewModel = viewModel.cardDeckViewModel
         cardStackContainerView.cardStackContainerViewModel = viewModel.cardStackContainerViewModel

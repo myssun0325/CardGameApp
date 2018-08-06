@@ -8,26 +8,29 @@
 
 import UIKit
 
-class CardStackView: UIView {
+class CardStackView: UIStackView {
     var cardStackViewModel: CardStackViewModel!
     private var cardViews: [CardView] = []
     
+    private func setupStackViewAttributes() {
+        axis = .vertical
+        distribution = .fillEqually
+        alignment = .center
+        spacing = -50
+    }
+    
     convenience init(viewModel: CardStackViewModel, frame: CGRect) {
         self.init(frame: frame)
+        setupStackViewAttributes()
         self.cardStackViewModel = viewModel
         self.isUserInteractionEnabled = true
     }
     
     func makeCardViews() {
         for cardViewModel in cardStackViewModel {
-            var originY: CGFloat = 0
-            if let topCard = self.subviews.last {
-                originY = topCard.frame.origin.y + CardSize.height * 0.2
-            }
-            let cardOrigin = CGPoint(x: 0, y: originY)
-            let cardView = CardView(viewModel: cardViewModel, frame:CGRect(origin: cardOrigin, size: CGSize(width: CardSize.width, height: CardSize.height)))
+            let cardView = CardView(viewModel: cardViewModel, frame: .zero)
             self.cardViews.append(cardView)
-            self.addSubview(cardView)
+            self.addArrangedSubview(cardView)
         }
     }
 }

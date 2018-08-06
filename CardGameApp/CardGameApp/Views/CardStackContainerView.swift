@@ -8,10 +8,17 @@
 
 import UIKit
 
-class CardStackContainerView: UIView, EmptyViewSettable, IteratorProtocol, Sequence {
+class CardStackContainerView: UIStackView, EmptyViewSettable, IteratorProtocol, Sequence {
     private let numberOfCardStack = 7
     var cardStackContainerViewModel: CardStackContainerViewModel!
     private var cardStackViews: [CardStackView] = []
+    
+    private func setupStackViewAttributes() {
+        axis = .horizontal
+        distribution = .equalSpacing
+        alignment = .top
+        spacing = 5
+    }
     
     convenience init(viewModel: CardStackContainerViewModel, frame: CGRect) {
         self.init(frame: frame)
@@ -21,18 +28,21 @@ class CardStackContainerView: UIView, EmptyViewSettable, IteratorProtocol, Seque
     override init(frame: CGRect) {
         super.init(frame: frame)
         setEmptyLayerViews(numberOfCardStack)
+        setupStackViewAttributes()
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setEmptyLayerViews(numberOfCardStack)
+        setupStackViewAttributes()
     }
     
     func makeCardStackViews() {
-        for (index, cardStackViewModel) in cardStackContainerViewModel.enumerated() {
-            let cardStackView = CardStackView(viewModel: cardStackViewModel, frame: CGRect(origin: CGPoint(x: CGFloat(index) * (CardSize.originXSpacing), y: 0), size: CGSize(width: CardSize.width, height: CardSize.height)))
+        for cardStackViewModel in cardStackContainerViewModel {
+            let cardStackView = CardStackView(viewModel: cardStackViewModel, frame: .zero)
+            cardStackView.widthAnchor.constraint(equalToConstant: CardSize.width).isActive = true
             self.cardStackViews.append(cardStackView)
-            self.addSubview(cardStackView)
+            self.addArrangedSubview(cardStackView)
         }
     }
     

@@ -33,5 +33,7 @@ class CardView: UIImageView {
         self.isUserInteractionEnabled = true
         layer.cornerRadius = 5
         layer.masksToBounds = true
+        widthAnchor.constraint(equalToConstant: CardSize.width).isActive = true
+        heightAnchor.constraint(equalToConstant: CardSize.height).isActive = true
     }
 }
