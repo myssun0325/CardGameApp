@@ -22,11 +22,13 @@ class CardView: UIImageView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupDefault()
+        setupGestureRecognizer()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupDefault()
+        setupGestureRecognizer()
     }
     
     private func setupDefault() {
@@ -35,5 +37,15 @@ class CardView: UIImageView {
         layer.masksToBounds = true
         widthAnchor.constraint(equalToConstant: CardSize.width).isActive = true
         heightAnchor.constraint(equalToConstant: CardSize.height).isActive = true
+    }
+    
+    private func setupGestureRecognizer() {
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(self.didCardDoubleTapped(_:)))
+        recognizer.numberOfTapsRequired = 2
+        self.addGestureRecognizer(recognizer)
+    }
+    
+    @objc func didCardDoubleTapped(_ gestureRecognizer: UIGestureRecognizer) {
+        guard self.cardViewModel.isOpen else { return }
     }
 }
