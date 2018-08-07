@@ -47,6 +47,6 @@ class CardView: UIImageView {
     
     @objc func didDoubleTapped(_ gestureRecognizer: UITapGestureRecognizer) {
         guard self.isHighlighted else { return }
-        NotificationCenter.default.post(name: .cardViewDidDoubleTapped, object: self, userInfo: ["recognizer":gestureRecognizer])
+        cardViewModel.didDoubleTapped()
     }
 }

@@ -11,12 +11,21 @@ import Foundation
 class WastePile {
     private var cards: [Card] = []
     
+    func isAceOnTop() -> Bool {
+        guard let topCard = self.cards.last else { return false }
+        return topCard.isEqualNumber(.ace)
+    }
+    
     func emptyAllCards() {
         cards.removeAll()
     }
     
     func push(card: Card) {
         self.cards.append(card)
+    }
+    
+    func popTopCard() -> Card? {
+        return cards.popLast()
     }
     
     func recycle() -> [Card] {

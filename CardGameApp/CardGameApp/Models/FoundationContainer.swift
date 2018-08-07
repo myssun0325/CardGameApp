@@ -11,10 +11,33 @@ import Foundation
 class FoundationContainer: IteratorProtocol, Sequence {
     private var foundationDecks: [FoundationDeck] = []
     
-    func emptyAllFoundationDecks() {
-        foundationDecks.removeAll()
+    init() {
+        (0..<4).forEach { _ in
+            self.foundationDecks.append(FoundationDeck())
+        }
     }
     
+    func emptyAllFoundationDecks() {
+        foundationDecks.forEach { $0.reset() }
+    }
+    
+    func firstIndexOfEmptyFoundationDeck() -> Int {
+        for (index, foundationDeck) in foundationDecks.enumerated() {
+            if foundationDeck.isEmpty() { return index }
+        }
+        return 0
+    }
+    
+    // 들어갈 수 있는 Foundation이 있는지 확인
+    func canPushFoundationDecks(_ card: Card) -> Position? {
+        for (index, foundationDeck) in foundationDecks.enumerated() {
+            if foundationDeck.isNextCard(card) {
+                return Position.foundation(index)
+            }
+        }
+        return nil
+    }
+
     // Iterator, Sequence
     private var index: Int = 0
     func next() -> FoundationDeck? {
@@ -25,5 +48,9 @@ class FoundationContainer: IteratorProtocol, Sequence {
             self.index = 0
             return nil
         }
+    }
+    
+    subscript(index: Int) -> FoundationDeck {
+        return foundationDecks[index]
     }
 }

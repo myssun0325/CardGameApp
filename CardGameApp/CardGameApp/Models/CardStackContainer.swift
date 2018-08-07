@@ -24,7 +24,28 @@ class CardStackContainer: IteratorProtocol, Sequence {
     }
     
     func push(card: Card, index: Int) {
-        self.cardStacks[index].add(card: card)
+        self.cardStacks[index].push(card: card)
+    }
+    
+    // 들어갈 수 있는 stack 확인
+    func canPushCardStack(_ card: Card) -> Position? {
+        for (index, cardStack) in cardStacks.enumerated() {
+            if cardStack.isNextCard(card) {
+                return Position.cardStack(index)
+            }
+        }
+        return nil
+    }
+    
+    func checkIfKingCard(_ card: Card) -> Position? {
+        if card.isEqualNumber(.king) {
+            for (index, cardStack) in cardStacks.enumerated() {
+                if cardStack.isEmpty() {
+                    return Position.cardStack(index)
+                }
+            }
+        }
+        return nil
     }
     
     // Iterator, Sequence
@@ -37,5 +58,9 @@ class CardStackContainer: IteratorProtocol, Sequence {
             self.index = 0
             return nil
         }
+    }
+    
+    subscript(index: Int) -> CardStack {
+        return cardStacks[index]
     }
 }

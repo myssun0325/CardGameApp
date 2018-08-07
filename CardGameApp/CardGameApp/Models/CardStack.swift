@@ -27,8 +27,21 @@ class CardStack: IteratorProtocol, Sequence {
         self.cards.removeAll()
     }
     
-    func add(card: Card) {
+    func push(card: Card) {
         self.cards.append(card)
+    }
+    
+    func isNextCard(_ nextCard: Card) -> Bool {
+        guard let topCard = self.cards.last else { return false }
+        return topCard.isNextCardInCardStack(nextCard)
+    }
+    
+    func isEmpty() -> Bool {
+        return cards.count == 0
+    }
+    
+    func popTopCard() -> Card? {
+        return self.cards.popLast()
     }
     
     // Iterator, Sequence

@@ -26,6 +26,33 @@ class Card: CustomStringConvertible {
     var description: String {
         return self.suit.description + self.number.description
     }
+    
+    func isEqualNumber(_ number: Number) -> Bool {
+        return self.number == number
+    }
+    
+    func isEqualSuitCard(_ card: Card) -> Bool {
+        return self.suit == card.suit
+    }
+    
+    func isEqualNumberCard(_ card: Card) -> Bool {
+        return self.number == card.number
+    }
+    
+    func isNextCardInFoundationDeck(_ card: Card) -> Bool {
+        return (card.number.rawValue == self.number.rawValue + 1) && (card.suit == self.suit)
+    }
+    
+    func isNextCardInCardStack(_ card: Card) -> Bool {
+        guard (self.number.rawValue - 1) == card.number.rawValue else { return false }
+        switch self.suit {
+        case .clubs, .spades:
+            if card.suit == .clubs || card.suit == .spades { return false }
+        default:
+            if card.suit == .diamonds || card.suit == .hearts { return false }
+        }
+        return true
+    }
 }
 
 extension Card: Comparable {
@@ -34,7 +61,7 @@ extension Card: Comparable {
     }
     
     static func == (lhs: Card, rhs: Card) -> Bool {
-        return lhs.number == rhs.number && lhs.number == rhs.number
+        return lhs.number == rhs.number && lhs.suit == rhs.suit
     }
 }
 
@@ -57,7 +84,7 @@ extension Card {
             return lhs.rawValue < rhs.rawValue
         }
         
-        case two = 2, three, four, five, six, seven, eight, nine, ten, jack, queen, king, ace
+        case ace = 1, two = 2, three, four, five, six, seven, eight, nine, ten, jack, queen, king
         var description: String {
             switch self {
             case .jack: return "J"
@@ -68,6 +95,6 @@ extension Card {
                 return String(self.rawValue)
             }
         }
-        static var allCases: [Number] = [.two, .three, .four, .five, .six, .seven, .eight, .nine, .ten, .jack, .queen, .king, .ace]
+        static var allCases: [Number] = [.ace, .two, .three, .four, .five, .six, .seven, .eight, .nine, .ten, .jack, .queen, .king]
     }
 }

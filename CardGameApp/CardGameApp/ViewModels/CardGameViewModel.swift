@@ -11,7 +11,6 @@ import Foundation
 protocol CardGameViewModelProtocol {
     func resetGame()
     func openCardDeck()
-    func checkPositionToMove(from: Position)
     var cardDeckViewModel: CardDeckViewModel! { get }
     var cardStackContainerViewModel: CardStackContainerViewModel! { get }
     var wastePileViewModel: WastePileViewModel! { get }
@@ -36,6 +35,8 @@ class CardGameViewModel: CardGameViewModelProtocol {
         NotificationCenter.default.addObserver(self, selector: #selector(self.cardGameDidReset(_:)), name: .cardGameDidReset, object: cardGame)
         NotificationCenter.default.addObserver(self, selector: #selector(self.cardDeckDidOpen(_:)), name: .cardDeckDidOpen, object: cardGame)
         NotificationCenter.default.addObserver(self, selector: #selector(self.wastePileDidRecycle(_:)), name: .wastePileDidRecycle, object: cardGame)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.cardDidDoubleTapped(_:)), name: .cardDidDoubleTapped, object: nil)
     }
     
     @objc func cardGameDidReset(_ notification: Notification) {
@@ -58,15 +59,24 @@ class CardGameViewModel: CardGameViewModelProtocol {
         NotificationCenter.default.post(name: .wastePileVMDidRecycle, object: self)
     }
     
+    @objc func cardDidDoubleTapped(_ notification: Notification) {
+        guard let tappedCardViewModel = notification.object as? CardViewModel else { return }
+        let fromPosition = checkFromPosition(tappedCardViewModel)
+        guard let toPosition = cardGame.positionToMove(card: tappedCardViewModel.card, from: fromPosition) else { return }
+    }
+    
+    func checkFromPosition(_ cardViewModel: CardViewModel) -> Position {
+        guard let index = cardStackContainerViewModel.indexOfCardStack(cardViewModel) else {
+            return Position.wastePile
+        }
+        return Position.cardStack(index)
+    }
+    
     func resetGame() {
         cardGame.resetGame()
     }
     
     func openCardDeck() {
         cardGame.openCardDeck()
-    }
-    
-    func checkPositionToMove(from: Position) {
-        
     }
 }

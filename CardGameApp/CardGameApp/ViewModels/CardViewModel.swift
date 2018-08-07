@@ -10,7 +10,7 @@ import Foundation
 
 class CardViewModel {
     // Model
-    private let card: Card
+    let card: Card
     private(set) var imageName: String
     
     var isOpen: Bool {
@@ -20,5 +20,15 @@ class CardViewModel {
     init(card: Card) {
         self.card = card
         self.imageName = "\(card)"
+    }
+    
+    func didDoubleTapped() {
+        NotificationCenter.default.post(name: .cardDidDoubleTapped, object: self)
+    }
+}
+
+extension CardViewModel: Equatable {
+    static func == (lhs: CardViewModel, rhs: CardViewModel) -> Bool {
+        return lhs.card == rhs.card
     }
 }

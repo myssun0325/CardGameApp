@@ -19,7 +19,5 @@ extension Notification.Name {
     static let cardGameVMDidReset = Notification.Name("cardGameVMDidReset")
     static let cardDeckVMDidOpen = Notification.Name("cardDeckVMDidOpen")
     static let wastePileVMDidRecycle = Notification.Name("wastePileVMDidRecycle")
-
-    // View
-    static let cardViewDidDoubleTapped = Notification.Name("cardViewDidDoubleTapped")
+    static let cardDidDoubleTapped = Notification.Name("cardDidDoubleTapped")
 }
