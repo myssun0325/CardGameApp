@@ -1,34 +1,30 @@
 //
-//  CardStackViewModel.swift
+//  FoundationDeckViewModel.swift
 //  CardGameApp
 //
-//  Created by moon on 2018. 8. 2..
+//  Created by moon on 2018. 8. 7..
 //  Copyright © 2018년 moon. All rights reserved.
 //
 
 import Foundation
 
-class CardStackViewModel: IteratorProtocol, Sequence {
-    private let cardStack: CardStack
+class FoundationDeckViewModel: IteratorProtocol, Sequence {
+    private let foundationDeck: FoundationDeck
     private var cardViewModels: [CardViewModel] = []
     
-    init(cardStack: CardStack) {
-        self.cardStack = cardStack
+    init(foundationDeck: FoundationDeck) {
+        self.foundationDeck = foundationDeck
     }
     
-    func initCardViewModels() {
-        self.cardViewModels.removeAll()
-        for card in cardStack {
+    func initCardViewModel() {
+        cardViewModels.removeAll()
+        for card in foundationDeck {
             cardViewModels.append(CardViewModel(card: card))
         }
     }
     
-    func popCardViewModel() -> CardViewModel? {
-        return cardViewModels.popLast()
-    }
-    
     func push(cardViewModel: CardViewModel) {
-        cardViewModels.append(cardViewModel)
+        self.cardViewModels.append(cardViewModel)
     }
     
     // Iterator, Sequence

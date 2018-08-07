@@ -28,6 +28,9 @@
 		737F20A520FF9518009E6813 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737F20A420FF9518009E6813 /* Card.swift */; };
 		737F20A720FF9CD0009E6813 /* CardDeck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737F20A620FF9CD0009E6813 /* CardDeck.swift */; };
 		737F20AA21002AA5009E6813 /* CardDeckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737F20A921002AA5009E6813 /* CardDeckView.swift */; };
+		73927451211996B70067D0BC /* FoundationContainerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73927450211996B70067D0BC /* FoundationContainerViewModel.swift */; };
+		73927453211996EA0067D0BC /* FoundationDeckViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73927452211996EA0067D0BC /* FoundationDeckViewModel.swift */; };
+		739274552119C4DF0067D0BC /* FoundationDeckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739274542119C4DF0067D0BC /* FoundationDeckView.swift */; };
 		73A8EF34210C8B9200D3AD48 /* WastePileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A8EF33210C8B9200D3AD48 /* WastePileView.swift */; };
 		73E40ABD210F2A51004754E3 /* WastePile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E40ABC210F2A51004754E3 /* WastePile.swift */; };
 		73EAE7D32109D330009EBDB6 /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EAE7D22109D330009EBDB6 /* CardViewModel.swift */; };
@@ -65,6 +68,9 @@
 		737F20A420FF9518009E6813 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		737F20A620FF9CD0009E6813 /* CardDeck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDeck.swift; sourceTree = "<group>"; };
 		737F20A921002AA5009E6813 /* CardDeckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDeckView.swift; sourceTree = "<group>"; };
+		73927450211996B70067D0BC /* FoundationContainerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoundationContainerViewModel.swift; sourceTree = "<group>"; };
+		73927452211996EA0067D0BC /* FoundationDeckViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoundationDeckViewModel.swift; sourceTree = "<group>"; };
+		739274542119C4DF0067D0BC /* FoundationDeckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoundationDeckView.swift; sourceTree = "<group>"; };
 		73A8EF33210C8B9200D3AD48 /* WastePileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WastePileView.swift; sourceTree = "<group>"; };
 		73E40ABC210F2A51004754E3 /* WastePile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WastePile.swift; sourceTree = "<group>"; };
 		73EAE7D22109D330009EBDB6 /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
@@ -152,6 +158,8 @@
 				73EAE7D6210ADF4C009EBDB6 /* CardGameViewModel.swift */,
 				730CCE572112C6750062719D /* CardStackContainerViewModel.swift */,
 				730CCE5F2112FA0A0062719D /* WastePileViewModel.swift */,
+				73927450211996B70067D0BC /* FoundationContainerViewModel.swift */,
+				73927452211996EA0067D0BC /* FoundationDeckViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -182,6 +190,7 @@
 				73A8EF33210C8B9200D3AD48 /* WastePileView.swift */,
 				737F20A921002AA5009E6813 /* CardDeckView.swift */,
 				730CCE5B2112CE400062719D /* CardStackView.swift */,
+				739274542119C4DF0067D0BC /* FoundationDeckView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -313,8 +322,10 @@
 				7333ECBA20FCEDBE006EFEF4 /* ViewController.swift in Sources */,
 				730CCE582112C6750062719D /* CardStackContainerViewModel.swift in Sources */,
 				737F20AA21002AA5009E6813 /* CardDeckView.swift in Sources */,
+				73927451211996B70067D0BC /* FoundationContainerViewModel.swift in Sources */,
 				733AB9242105B06A0084789C /* CardStackContainer.swift in Sources */,
 				733AB9262105C2AF0084789C /* CardView.swift in Sources */,
+				739274552119C4DF0067D0BC /* FoundationDeckView.swift in Sources */,
 				737F20A520FF9518009E6813 /* Card.swift in Sources */,
 				73EAE7DB210C38D3009EBDB6 /* EmptyLayerView.swift in Sources */,
 				73418E22210981EF008EC6C9 /* CardDeckViewModel.swift in Sources */,
@@ -335,6 +346,7 @@
 				7333ECB820FCEDBE006EFEF4 /* AppDelegate.swift in Sources */,
 				73EAE7D5210ADE0A009EBDB6 /* CardGameView.swift in Sources */,
 				737EE4752117E79B00114290 /* FoundationDeck.swift in Sources */,
+				73927453211996EA0067D0BC /* FoundationDeckViewModel.swift in Sources */,
 				73EAE801210C8A38009EBDB6 /* EmptyViewSettable.swift in Sources */,
 				734F90EB2100EAB600EA9DDF /* CardStack.swift in Sources */,
 			);

@@ -30,6 +30,10 @@ class WastePileViewModel: IteratorProtocol, Sequence {
         return removed
     }
     
+    func popTopCardViewModel() -> CardViewModel? {
+        return cardViewModels.popLast()
+    }
+    
     // Iterator, Sequence
     private var index: Int = 0
     func next() -> CardViewModel? {

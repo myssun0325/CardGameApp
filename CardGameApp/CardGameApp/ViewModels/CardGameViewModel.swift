@@ -14,6 +14,7 @@ protocol CardGameViewModelProtocol {
     var cardDeckViewModel: CardDeckViewModel! { get }
     var cardStackContainerViewModel: CardStackContainerViewModel! { get }
     var wastePileViewModel: WastePileViewModel! { get }
+    var foundationContainerViewModel: FoundationContainerViewModel! { get }
 }
 
 class CardGameViewModel: CardGameViewModelProtocol {
@@ -22,12 +23,14 @@ class CardGameViewModel: CardGameViewModelProtocol {
     private(set) var cardDeckViewModel: CardDeckViewModel!
     private(set) var cardStackContainerViewModel: CardStackContainerViewModel!
     private(set) var wastePileViewModel: WastePileViewModel!
+    private(set) var foundationContainerViewModel: FoundationContainerViewModel!
     
     init() {
         self.cardGame = CardGame()
         self.cardDeckViewModel = CardDeckViewModel(cardDeck: cardGame.cardDeck)
         self.cardStackContainerViewModel = CardStackContainerViewModel(cardStackContainer: cardGame.cardStackContainer)
         self.wastePileViewModel = WastePileViewModel(wastePile: cardGame.wastePile)
+        self.foundationContainerViewModel = FoundationContainerViewModel(foundationContainer: cardGame.foundationContainer)
         setupNotificationObservers()
     }
     
@@ -35,6 +38,7 @@ class CardGameViewModel: CardGameViewModelProtocol {
         NotificationCenter.default.addObserver(self, selector: #selector(self.cardGameDidReset(_:)), name: .cardGameDidReset, object: cardGame)
         NotificationCenter.default.addObserver(self, selector: #selector(self.cardDeckDidOpen(_:)), name: .cardDeckDidOpen, object: cardGame)
         NotificationCenter.default.addObserver(self, selector: #selector(self.wastePileDidRecycle(_:)), name: .wastePileDidRecycle, object: cardGame)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.cardDidMoved(_:)), name: .cardDidMoved, object: cardGame)
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.cardDidDoubleTapped(_:)), name: .cardDidDoubleTapped, object: nil)
     }
@@ -42,6 +46,7 @@ class CardGameViewModel: CardGameViewModelProtocol {
     @objc func cardGameDidReset(_ notification: Notification) {
         wastePileViewModel.initCardViewModels()
         cardDeckViewModel.initCardViewModels()
+        foundationContainerViewModel.initFoundationDeckViewModels()
         cardStackContainerViewModel.initCardStackViewModels()
         cardStackContainerViewModel.forEach { $0.initCardViewModels() }
         NotificationCenter.default.post(name: .cardGameVMDidReset, object: self)
@@ -63,6 +68,14 @@ class CardGameViewModel: CardGameViewModelProtocol {
         guard let tappedCardViewModel = notification.object as? CardViewModel else { return }
         let fromPosition = checkFromPosition(tappedCardViewModel)
         guard let toPosition = cardGame.positionToMove(card: tappedCardViewModel.card, from: fromPosition) else { return }
+        cardGame.moveCard(from: fromPosition, to: toPosition)
+    }
+    
+    @objc func cardDidMoved(_ notification: Notification) {
+        guard let fromPosition = notification.userInfo?["from"] as? Position else { return }
+        guard let toPostiion = notification.userInfo?["to"] as? Position else { return }
+        moveCardViewModel(from: fromPosition, to: toPostiion)
+        NotificationCenter.default.post(name: .cardVMDidMoved, object: self, userInfo: notification.userInfo)
     }
     
     func checkFromPosition(_ cardViewModel: CardViewModel) -> Position {
@@ -78,5 +91,32 @@ class CardGameViewModel: CardGameViewModelProtocol {
     
     func openCardDeck() {
         cardGame.openCardDeck()
+    }
+    
+    private func popCardViewModel(from: Position) -> CardViewModel? {
+        switch from {
+        case .wastePile:
+            return wastePileViewModel.popTopCardViewModel()
+        case .cardStack(let index):
+            return cardStackContainerViewModel[index].popCardViewModel()
+        default:
+            return nil
+        }
+    }
+    
+    private func push(cardViewModel: CardViewModel, to toPosition: Position) {
+        switch toPosition {
+        case .foundation(let index):
+            foundationContainerViewModel.push(cardViewModel: cardViewModel, at: index)
+        case .cardStack(let index):
+            cardStackContainerViewModel.push(cardViewModel: cardViewModel, at: index)
+        default:
+            return
+        }
+    }
+    
+    private func moveCardViewModel(from fromPosition: Position, to toPosition: Position) {
+        guard let popped: CardViewModel = popCardViewModel(from: fromPosition) else { return }
+        push(cardViewModel: popped, to: toPosition)
     }
 }

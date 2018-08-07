@@ -11,6 +11,8 @@ import UIKit
 class FoundationContainerView: UIView, EmptyViewSettable {
 
     private var numberOfFoundation = 4
+    var foundationContainerViewModel: FoundationContainerViewModel!
+    private var foundationDeckViews: [FoundationDeckView] = []
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -20,5 +22,19 @@ class FoundationContainerView: UIView, EmptyViewSettable {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setEmptyLayerViews(numberOfFoundation)
+    }
+    
+    func makeFoundationDeckViews() {
+        for (index, foundationDeckViewModel) in foundationContainerViewModel.enumerated() {
+            let foundationDeckView = FoundationDeckView(viewModel: foundationDeckViewModel,
+                                                        frame: CGRect(origin: CGPoint(x: (CGFloat(index) * CardSize.originXSpacing), y: 0),
+                                                                      size: CGSize(width: CardSize.width, height: CardSize.height)))
+            self.foundationDeckViews.append(foundationDeckView)
+            self.addSubview(foundationDeckView)
+        }
+    }
+    
+    subscript(index: Int) -> FoundationDeckView {
+        return foundationDeckViews[index]
     }
 }

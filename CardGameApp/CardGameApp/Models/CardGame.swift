@@ -116,5 +116,7 @@ class CardGame {
     func moveCard(from fromPosition: Position, to toPosition: Position) {
         guard let card = popCard(from: fromPosition) else { return }
         push(card: card, to: toPosition)
+        let moveInfo = ["from": fromPosition, "to": toPosition]
+        NotificationCenter.default.post(name: .cardDidMoved, object: self, userInfo: moveInfo)
     }
 }

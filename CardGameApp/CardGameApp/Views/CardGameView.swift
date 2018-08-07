@@ -32,6 +32,7 @@ class CardGameView: UIView {
         NotificationCenter.default.addObserver(self, selector: #selector(self.cardGameVMDidReset(_:)), name: .cardGameVMDidReset, object: cardGameViewModel)
         NotificationCenter.default.addObserver(self, selector: #selector(self.cardDeckVMDidOpen(_:)), name: .cardDeckVMDidOpen, object: cardGameViewModel)
         NotificationCenter.default.addObserver(self, selector: #selector(self.wastePileVMDidRecycle(_:)), name: .wastePileVMDidRecycle, object: cardGameViewModel)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.cardVMDidMoved(_:)), name: .cardVMDidMoved, object: cardGameViewModel)
     }
     
     private func setupCardStackConstraints() {
@@ -47,6 +48,7 @@ class CardGameView: UIView {
         cardDeckView.makeCardViews()
         cardStackContainerView.makeCardStackViews()
         cardStackContainerView.makeCardViews()
+        foundationContainerView.makeFoundationDeckViews()
     }
     
     @objc func cardDeckVMDidOpen(_ notification: Notification) {
@@ -62,6 +64,12 @@ class CardGameView: UIView {
         }
     }
     
+    @objc func cardVMDidMoved(_ notification: Notification) {
+        guard let fromPosition = notification.userInfo?["from"] as? Position else { return }
+        guard let toPosition = notification.userInfo?["to"] as? Position else { return }
+        moveCardView(from: fromPosition, to: toPosition)
+    }
+    
     convenience init(viewModel: CardGameViewModelProtocol, frame: CGRect) {
         self.init(frame: frame)
         setupConatinerViews()
@@ -70,6 +78,7 @@ class CardGameView: UIView {
         cardDeckView.cardDeckViewModel = viewModel.cardDeckViewModel
         cardStackContainerView.cardStackContainerViewModel = viewModel.cardStackContainerViewModel
         wastePileView.wastePileViewModel = viewModel.wastePileViewModel
+        foundationContainerView.foundationContainerViewModel = viewModel.foundationContainerViewModel
         setupNotificationObservers()
     }
     
@@ -82,5 +91,9 @@ class CardGameView: UIView {
         if self.cardDeckView.frame.contains(touchPoint) {
             cardGameViewModel.openCardDeck()
         }
+    }
+    
+    func moveCardView(from fromPosition: Position, to toPosition: Position) {
+        // 구현 준비 중
     }
 }

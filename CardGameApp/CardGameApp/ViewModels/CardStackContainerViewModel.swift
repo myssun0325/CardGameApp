@@ -32,6 +32,14 @@ class CardStackContainerViewModel: IteratorProtocol, Sequence {
         return nil
     }
     
+    func popCardViewModel(at index: Int) -> CardViewModel? {
+        return cardStackViewModels[index].popCardViewModel()
+    }
+    
+    func push(cardViewModel: CardViewModel, at index: Int) {
+        cardStackViewModels[index].push(cardViewModel: cardViewModel)
+    }
+    
     // Iterator, Sequence
     private var index: Int = 0
     func next() -> CardStackViewModel? {
@@ -42,5 +50,9 @@ class CardStackContainerViewModel: IteratorProtocol, Sequence {
             self.index = 0
             return nil
         }
+    }
+    
+    subscript(index: Int) -> CardStackViewModel {
+        return self.cardStackViewModels[index]
     }
 }
