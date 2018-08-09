@@ -38,9 +38,8 @@ class CardGameViewModel: CardGameViewModelProtocol {
         NotificationCenter.default.addObserver(self, selector: #selector(self.cardGameDidReset(_:)), name: .cardGameDidReset, object: cardGame)
         NotificationCenter.default.addObserver(self, selector: #selector(self.cardDeckDidOpen(_:)), name: .cardDeckDidOpen, object: cardGame)
         NotificationCenter.default.addObserver(self, selector: #selector(self.wastePileDidRecycle(_:)), name: .wastePileDidRecycle, object: cardGame)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.cardDidMoved(_:)), name: .cardDidMoved, object: cardGame)
-        
         NotificationCenter.default.addObserver(self, selector: #selector(self.cardDidDoubleTapped(_:)), name: .cardDidDoubleTapped, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.cardDidMoved(_:)), name: .cardDidMoved, object: cardGame)
     }
     
     @objc func cardGameDidReset(_ notification: Notification) {
@@ -66,7 +65,7 @@ class CardGameViewModel: CardGameViewModelProtocol {
     
     @objc func cardDidDoubleTapped(_ notification: Notification) {
         guard let tappedCardViewModel = notification.object as? CardViewModel else { return }
-        let fromPosition = checkFromPosition(tappedCardViewModel)
+        guard let fromPosition = fromPositionOf(cardViewModel: tappedCardViewModel) else { return }
         guard let toPosition = cardGame.positionToMove(card: tappedCardViewModel.card, from: fromPosition) else { return }
         cardGame.moveCard(from: fromPosition, to: toPosition)
     }
@@ -78,10 +77,14 @@ class CardGameViewModel: CardGameViewModelProtocol {
         NotificationCenter.default.post(name: .cardVMDidMoved, object: self, userInfo: notification.userInfo)
     }
     
-    func checkFromPosition(_ cardViewModel: CardViewModel) -> Position {
-        guard let index = cardStackContainerViewModel.indexOfCardStack(cardViewModel) else {
+    func fromPositionOf(cardViewModel: CardViewModel) -> Position? {
+        if wastePileViewModel.contain(cardViewModel) {
             return Position.wastePile
         }
+        guard let index = cardStackContainerViewModel.indexOfCardStack(cardViewModel) else {
+            return nil
+        }
+        if cardStackContainerViewModel[index].topCardViewModel != cardViewModel { return nil }
         return Position.cardStack(index)
     }
     

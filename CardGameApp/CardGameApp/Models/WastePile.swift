@@ -30,7 +30,7 @@ class WastePile {
     
     func recycle() -> [Card] {
         let reversed: [Card] = cards.reversed()
-        reversed.forEach { $0.flip() }
+        reversed.forEach { $0.close() }
         cards.removeAll()
         return reversed
     }

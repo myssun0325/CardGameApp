@@ -41,7 +41,9 @@ class CardStack: IteratorProtocol, Sequence {
     }
     
     func popTopCard() -> Card? {
-        return self.cards.popLast()
+        guard let topCard = self.cards.popLast() else { return nil }
+        self.cards.last?.open()
+        return topCard
     }
     
     // Iterator, Sequence

@@ -16,7 +16,7 @@ class WastePileView: UIView, EmptyViewSettable, IteratorProtocol, Sequence {
         self.init(frame: frame)
         self.wastePileViewModel = viewModel
     }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setEmptyLayerViews(1)
@@ -39,6 +39,10 @@ class WastePileView: UIView, EmptyViewSettable, IteratorProtocol, Sequence {
     func resetCardViews() {
         self.cardViews.forEach { $0.removeFromSuperview() }
         self.cardViews.removeAll()
+    }
+    
+    var topCard: CardView? {
+        return cardViews.last
     }
     
     // Iterator, Sequence

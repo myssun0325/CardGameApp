@@ -16,4 +16,12 @@ class FoundationDeckView: UIView {
         self.init(frame: frame)
         self.foundationDeckViewModel = viewModel
     }
+    
+    func push(cardView: CardView) {
+        cardViews.append(cardView)
+        self.addSubview(cardView)
+        cardView.translatesAutoresizingMaskIntoConstraints = false
+        cardView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        cardView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+    }
 }

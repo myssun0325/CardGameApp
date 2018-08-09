@@ -23,12 +23,20 @@ class CardStackViewModel: IteratorProtocol, Sequence {
         }
     }
     
+    var topCardViewModel: CardViewModel? {
+        return cardViewModels.last
+    }
+    
     func popCardViewModel() -> CardViewModel? {
         return cardViewModels.popLast()
     }
     
     func push(cardViewModel: CardViewModel) {
         cardViewModels.append(cardViewModel)
+    }
+    
+    func contain(_ cardViewModel: CardViewModel) -> Bool {
+        return cardViewModels.contains(cardViewModel)
     }
     
     // Iterator, Sequence

@@ -34,6 +34,11 @@ class FoundationContainerView: UIView, EmptyViewSettable {
         }
     }
     
+    func resetFoundationDeckViews() {
+        foundationDeckViews.forEach { $0.removeFromSuperview() }
+        foundationDeckViews.removeAll()
+    }
+    
     subscript(index: Int) -> FoundationDeckView {
         return foundationDeckViews[index]
     }

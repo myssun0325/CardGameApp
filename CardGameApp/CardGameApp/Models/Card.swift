@@ -14,8 +14,12 @@ class Card: CustomStringConvertible {
     private let number: Number
     private(set) var isOpen: Bool = false
     
-    func flip() {
-        isOpen = !isOpen
+    func open() {
+        isOpen = true
+    }
+    
+    func close() {
+        isOpen = false
     }
     
     init(suit: Suit, number: Number) {
@@ -61,7 +65,7 @@ extension Card: Comparable {
     }
     
     static func == (lhs: Card, rhs: Card) -> Bool {
-        return lhs.number == rhs.number && lhs.suit == rhs.suit
+        return (lhs.number == rhs.number) && (lhs.suit == rhs.suit)
     }
 }
 

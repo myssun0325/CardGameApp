@@ -55,6 +55,10 @@ class CardStackContainerView: UIStackView, EmptyViewSettable, IteratorProtocol, 
         self.cardStackViews.removeAll()
     }
     
+    func topCardView(at index: Int) -> CardView? {
+        return self.cardStackViews[index].topCardView
+    }
+    
     // Iterator, Sequence
     private var index: Int = 0
     func next() -> CardStackView? {
@@ -65,5 +69,9 @@ class CardStackContainerView: UIStackView, EmptyViewSettable, IteratorProtocol, 
             self.index = 0
             return nil
         }
+    }
+    
+    subscript(index: Int) -> CardStackView {
+        return self.cardStackViews[index]
     }
 }

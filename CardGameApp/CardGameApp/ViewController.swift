@@ -29,6 +29,7 @@ class ViewController: UIViewController {
     private func setupBackGroundPatternImage() {
         guard let backgroundImage = UIImage(named: ImageName.background) else { return }
         self.view.backgroundColor = UIColor(patternImage: backgroundImage)
+
     }
     
     override func viewDidLoad() {

@@ -34,6 +34,10 @@ class WastePileViewModel: IteratorProtocol, Sequence {
         return cardViewModels.popLast()
     }
     
+    func contain(_ cardViewModel: CardViewModel) -> Bool {
+        return self.cardViewModels.contains(cardViewModel)
+    }
+    
     // Iterator, Sequence
     private var index: Int = 0
     func next() -> CardViewModel? {

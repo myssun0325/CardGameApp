@@ -33,4 +33,21 @@ class CardStackView: UIStackView {
             self.addArrangedSubview(cardView)
         }
     }
+    
+    var topCardView: CardView? {
+        return cardViews.last
+    }
+    
+    func popTopCardView() -> CardView? {
+        guard let topCard = cardViews.popLast() else {
+            return nil
+        }
+        cardViews.last?.isHighlighted = cardViews.last?.cardViewModel.isOpen ?? false
+        return topCard
+    }
+    
+    func push(cardView: CardView) {
+        self.cardViews.append(cardView)
+        self.addArrangedSubview(cardView)
+    }
 }

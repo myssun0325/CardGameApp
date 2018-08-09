@@ -45,6 +45,7 @@ class CardGameView: UIView {
         cardDeckView.resetCardViews()
         wastePileView.resetCardViews()
         cardStackContainerView.resetCardStackViews()
+        foundationContainerView.resetFoundationDeckViews()
         cardDeckView.makeCardViews()
         cardStackContainerView.makeCardStackViews()
         cardStackContainerView.makeCardViews()
@@ -93,7 +94,30 @@ class CardGameView: UIView {
         }
     }
     
+    private func popCardView(from position: Position) -> CardView? {
+        switch position {
+        case .wastePile:
+            return wastePileView.popTopCardView()
+        case .cardStack(let index):
+            return cardStackContainerView[index].popTopCardView()
+        default:
+            return nil
+        }
+    }
+    
+    private func push(cardView: CardView, to position: Position) {
+        switch position {
+        case .foundation(let index):
+            foundationContainerView[index].push(cardView: cardView)
+        case .cardStack(let index):
+            cardStackContainerView[index].push(cardView: cardView)
+        default:
+            return
+        }
+    }
+    
     func moveCardView(from fromPosition: Position, to toPosition: Position) {
-        // 구현 준비 중
+        guard let popped: CardView = popCardView(from: fromPosition) else { return }
+        push(cardView: popped, to: toPosition)
     }
 }

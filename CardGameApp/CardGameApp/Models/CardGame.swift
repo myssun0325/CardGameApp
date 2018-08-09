@@ -20,7 +20,7 @@ class CardGame {
         (1...CardGame.numberOfCardStacks).forEach {
             cardStackContainer.addCardStack(openCardsOfCardDeck($0))
         }
-        cardStackContainer.forEach { $0.topCard?.flip() }
+        cardStackContainer.forEach { $0.topCard?.open() }
     }
     
     fileprivate func openCardsOfCardDeck(_ numberOfCards: Int) -> [Card] {
@@ -38,7 +38,7 @@ class CardGame {
     
     func openCardDeck() {
         if let removed: Card = cardDeck.openTopCard() {
-            removed.flip()
+            removed.open()
             wastePile.push(card: removed)
             NotificationCenter.default.post(name: .cardDeckDidOpen, object: self)
         } else {
@@ -102,7 +102,7 @@ class CardGame {
         }
     }
     
-    private func push(card: Card, to toPosition: Position) {
+    private func push(_ card: Card, _ toPosition: Position) {
         switch toPosition {
         case .foundation(let index):
             foundationContainer[index].push(card: card)
@@ -115,7 +115,7 @@ class CardGame {
     
     func moveCard(from fromPosition: Position, to toPosition: Position) {
         guard let card = popCard(from: fromPosition) else { return }
-        push(card: card, to: toPosition)
+        push(card, toPosition)
         let moveInfo = ["from": fromPosition, "to": toPosition]
         NotificationCenter.default.post(name: .cardDidMoved, object: self, userInfo: moveInfo)
     }
