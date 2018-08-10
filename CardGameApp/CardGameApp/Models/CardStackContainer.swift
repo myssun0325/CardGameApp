@@ -37,7 +37,7 @@ class CardStackContainer: IteratorProtocol, Sequence {
         return nil
     }
     
-    func checkIfKingCard(_ card: Card) -> Position? {
+    func canPushKingCard(_ card: Card) -> Position? {
         if card.isEqualNumber(.king) {
             for (index, cardStack) in cardStacks.enumerated() {
                 if cardStack.isEmpty() {

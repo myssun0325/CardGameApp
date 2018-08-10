@@ -47,7 +47,7 @@ class CardGame {
         }
     }
     
-    private func checkIfAceCard(_ card: Card) -> Position? {
+    private func canPushAceCard(_ card: Card) -> Position? {
         if card.isEqualNumber(.ace) {
             let foundationDeckIndex = foundationContainer.firstIndexOfEmptyFoundationDeck()
             return Position.foundation(foundationDeckIndex)
@@ -55,11 +55,11 @@ class CardGame {
         return nil
     }
     
-    private func checkAceOrKing(_ card: Card) -> Position? {
-        if let position = checkIfAceCard(card) {
+    private func canPushAceOrKing(_ card: Card) -> Position? {
+        if let position = canPushAceCard(card) {
             return position
         }
-        if let position = cardStackContainer.checkIfKingCard(card) {
+        if let position = cardStackContainer.canPushKingCard(card) {
             return position
         }
         return nil
@@ -76,7 +76,7 @@ class CardGame {
     }
     
     func positionToMove(card: Card, from: Position) -> Position? {
-        if let toPosition = checkAceOrKing(card) { return toPosition }
+        if let toPosition = canPushAceOrKing(card) { return toPosition }
         switch from {
         case .wastePile:
             break
