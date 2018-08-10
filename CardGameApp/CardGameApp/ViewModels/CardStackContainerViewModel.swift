@@ -25,7 +25,7 @@ class CardStackContainerViewModel: IteratorProtocol, Sequence {
     
     func indexOfCardStack(_ cardViewModel: CardViewModel) -> Int? {
         for (index, cardStackViewModel) in cardStackViewModels.enumerated() {
-            if cardStackViewModel.contain(cardViewModel) {
+            if cardStackViewModel.contains(cardViewModel) {
                 return index
             }
         }
