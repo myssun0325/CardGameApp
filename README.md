@@ -41,3 +41,10 @@
 	- CardGameViewModel이 CardGameView에 Notification을 준다.
 
 	<img src="images/demo_step3.gif" width="50%">
+	
+## Step. 4
+
+<img src="images/demo_step4.gif" width="50%">
+
+
+- keyword: Animation, Coordinate, Converting UIView Coordinate, Superview-Subview relationship, Ownership
