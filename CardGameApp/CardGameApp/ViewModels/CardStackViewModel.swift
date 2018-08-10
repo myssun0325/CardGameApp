@@ -36,7 +36,12 @@ class CardStackViewModel: IteratorProtocol, Sequence {
     }
     
     func contain(_ cardViewModel: CardViewModel) -> Bool {
-        return cardViewModels.contains(cardViewModel)
+        for viewModel in cardViewModels {
+            if cardViewModel == viewModel {
+                return true
+            }
+        }
+        return false
     }
     
     // Iterator, Sequence

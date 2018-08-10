@@ -49,9 +49,4 @@ class CardView: UIImageView {
         guard self.isHighlighted else { return }
         cardViewModel.didDoubleTapped()
     }
-    
-//    func flip() {
-//        cardViewModel.flip()
-//        isHighlighted = cardViewModel.isOpen
-//    }
 }

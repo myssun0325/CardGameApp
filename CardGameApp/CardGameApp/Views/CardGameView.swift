@@ -116,8 +116,49 @@ class CardGameView: UIView {
         }
     }
     
+    private func topCardView(from: Position) -> CardView? {
+        switch from {
+        case .wastePile:
+            return wastePileView.topCardView
+        case .cardStack(let index):
+            return cardStackContainerView[index].topCardView
+        default:
+            return nil
+        }
+    }
+    
+    private func originOf(position: Position, base: UIView, isToPosition: Bool = false) -> CGPoint? {
+        switch position {
+        case .wastePile:
+            return wastePileView.convert(wastePileView.bounds.origin, to: base)
+        case .cardStack(let index):
+            guard let topCardView = cardStackContainerView[index].topCardView else {
+                return cardStackContainerView[index].convert(cardStackContainerView[index].bounds.origin, to: base)
+            }
+            var toOrigin = topCardView.convert(topCardView.bounds.origin, to: base)
+            if isToPosition { toOrigin.y += 20 }
+            return toOrigin
+        case .foundation(let index):
+            let foundationDeckView = foundationContainerView[index]
+            return foundationDeckView.convert(foundationDeckView.bounds.origin, to: base)
+        default:
+            return nil
+        }
+    }
+    
     func moveCardView(from fromPosition: Position, to toPosition: Position) {
-        guard let popped: CardView = popCardView(from: fromPosition) else { return }
-        push(cardView: popped, to: toPosition)
+        guard let fromOrigin = originOf(position: fromPosition, base: self) else { return }
+        guard let toOrigin = originOf(position: toPosition, base: self, isToPosition: true) else { return }
+        let moveDistance = (x: toOrigin.x - fromOrigin.x,
+                            y: toOrigin.y - fromOrigin.y)
+        guard let cardViewToAnimate = topCardView(from: fromPosition) else { return }
+        cardViewToAnimate.layer.zPosition = 1
+        UIView.animate(withDuration: 0.3, animations: {
+            cardViewToAnimate.frame.origin.x += moveDistance.x
+            cardViewToAnimate.frame.origin.y += moveDistance.y
+        }, completion: { [unowned self] _ in
+            guard let popped: CardView = self.popCardView(from: fromPosition) else { return }
+            self.push(cardView: popped, to: toPosition)
+        })
     }
 }

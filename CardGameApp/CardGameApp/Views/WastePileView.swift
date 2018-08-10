@@ -41,7 +41,7 @@ class WastePileView: UIView, EmptyViewSettable, IteratorProtocol, Sequence {
         self.cardViews.removeAll()
     }
     
-    var topCard: CardView? {
+    var topCardView: CardView? {
         return cardViews.last
     }
     
