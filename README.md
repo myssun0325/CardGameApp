@@ -1,12 +1,17 @@
 # Card Game App
 
 # Key Experience
+
+#### - 이슈 : subview위에 superview의 layer bound가 나타난 부분은 항상 superview의 layer bound는 모든 서브뷰 위에 그려져서 아래 있는 카드의 테두리가 위에 카드에 겹쳐보임
+
+#### - 해결방법: superview의 frame을 subview의 크기만큼 계산하여 변경합니다.
+
+- View > ViewModel > Model 방향으로의 이벤트는 항상 cardGameView > CardGameViewModel > CardGame(Model)로 전달되며 CardGame이 이벤트에 따라 필요한 모델에 변화를 준다.
+- Model > ViewModel > View는 모두 NotificationCenter를 이용하며 일관성을 위해 위와 마찬가지로 최상위 객체들을 통해만 전달된다. (단방향 순환구조)
+
 - 해당 프로젝트에서의 가장 큰 경험은 계층 구조를 가진 복잡한 객체들의 역할을 분리하고, 보여지는 로직과 비즈니스 로직을 분리하기 위해 뷰모델을 사용하여 MVVM패턴을 적용하려고 노력한 부분이었습니다. 또한 이벤트 처리와 이벤트 처리에 대한 결과를 반영하기 위한 뷰 업데이트 사이클의 단방향성에 신경써서 작업하였습니다.
 
 - 모델과 뷰모델 : 모델은 뷰에서 발생한 이벤트를 뷰모델을 통해 넘겨받아 처리 하고, 뷰모델은 이에 대한 결과를 뷰에 결과를 보여주기 위한 데이터를 처리하기 위한 Presenter의 역할을 합니다.
-
-- 이슈 : subview위에 superview의 layer bound가 나타난 부분은 항상 superview의 layer bound는 모든 서브뷰 위에 그려져서 아래 있는 카드의 테두리가 위에 카드에 겹쳐보임
--> 해결방법: superview의 frame을 subview의 크기만큼 계산하여 변경합니다.
 
 ## Step. 1
 - Keywords
