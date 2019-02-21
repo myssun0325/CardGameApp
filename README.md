@@ -4,7 +4,11 @@
 
 #### - 이슈 : subview위에 superview의 layer bound가 나타난 부분은 항상 superview의 layer bound는 모든 서브뷰 위에 그려져서 아래 있는 카드의 테두리가 위에 카드에 겹쳐보임
 
-#### - 해결방법: superview의 frame을 subview의 크기만큼 계산하여 변경합니다.
+#### - 해결방법: superview에 단순히 계층 구조자체만 변경하는게 아니라 superview의 frame을 subview의 크기만큼 늘려서 계산하여 변경하여 이슈 해결
+
+#### - 이슈 : 카드라는 특성상 위치에 따라 역할만 달라질뿐 기능과 코드가 중복되는 부분이 많이 생김. 뷰의 이동을 뷰모델의 이동에 반영해야하는 이슈.
+
+#### - 해결방법: Position이라는 enum을 정의하고 이에 따라 뷰의 현재 위치에 따라 유저액션에 따라 자동으로 뷰가 옮겨지고 그에 따라 뷰모델이 변화하도록 코드를 수정하여 이슈 해결
 
 - View > ViewModel > Model 방향으로의 이벤트는 항상 cardGameView > CardGameViewModel > CardGame(Model)로 전달되며 CardGame이 이벤트에 따라 필요한 모델에 변화를 준다.
 - Model > ViewModel > View는 모두 NotificationCenter를 이용하며 일관성을 위해 위와 마찬가지로 최상위 객체들을 통해만 전달된다. (단방향 순환구조)
